@@ -62,6 +62,7 @@ return <>
                 onChange={(e) => {
                     setState({ ...state, price: e.target.value })
                 }}
+                
             />
             </Form.Group>
             <Button onClick={(e) => {
