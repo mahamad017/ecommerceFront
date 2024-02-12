@@ -114,8 +114,6 @@ return (
             ))}
         </Form.Control>
 </Form.Group>
-    <Button onClick={(e) => {
-=======
         <Form.Group className="mb-3" controlId="fromBasicName">
             <Form.Label>Product Name</Form.Label>
             <Form.Control type="text" placeholder="Product Name"
@@ -150,7 +148,6 @@ return (
             />
             </Form.Group>
             <Button onClick={(e) => {
->>>>>>> f3a55d4acdc15dbb53e1d3985e5fa5669b98b546
                     callAddProduct()
                     e.preventDefault()
                 }} variant="primary" type="submit">
