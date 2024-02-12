@@ -115,6 +115,42 @@ return (
         </Form.Control>
 </Form.Group>
     <Button onClick={(e) => {
+=======
+        <Form.Group className="mb-3" controlId="fromBasicName">
+            <Form.Label>Product Name</Form.Label>
+            <Form.Control type="text" placeholder="Product Name"
+                onChange={(e) => {
+                    setState({ ...state, name: e.target.value })
+                }}
+            />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="fromBasicDescription">
+            <Form.Label>Product Description</Form.Label>
+            <Form.Control type="text" placeholder="Describe The Product"
+                onChange={(e) => {
+                    setState({ ...state, description: e.target.value })
+                }}
+            />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="fromBasicImage">
+            <Form.Label>Image URL</Form.Label>
+            <Form.Control type="text" placeholder="Put Image Url"
+                onChange={(e) => {
+                    setState({ ...state, image: e.target.value })
+                }}
+            />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="fromBasicPrice">
+            <Form.Label>Price</Form.Label>
+            <Form.Control type="number" placeholder="Product Price"
+                onChange={(e) => {
+                    setState({ ...state, price: e.target.value })
+                }}
+                
+            />
+            </Form.Group>
+            <Button onClick={(e) => {
+>>>>>>> f3a55d4acdc15dbb53e1d3985e5fa5669b98b546
                     callAddProduct()
                     e.preventDefault()
                 }} variant="primary" type="submit">
