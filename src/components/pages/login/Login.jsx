@@ -43,6 +43,7 @@ export default function LoginPage() {
             // save token (appState - Cockies)
             if (response.token != null) {
                 appContext.login(response.token, null)
+                localStorage.setItem("token",response.token)
                 setCookie('token', response.token)
 
                 // redirect to homepage                

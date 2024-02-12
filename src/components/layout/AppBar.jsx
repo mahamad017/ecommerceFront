@@ -108,6 +108,9 @@ function AppBar() {
                                         <Link onClick={onLogout} className='nav-link' >
                                             Logout
                                         </Link>
+                                        <Link to='dashboard' className='dropdown-item' >
+                                        Users
+                                    </Link>
                                     </>
                                 }
                             </>

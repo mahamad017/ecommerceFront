@@ -1,0 +1,143 @@
+body {
+    background-color: #e3e8e6;
+    place-items: center;
+    height: 100dvh;
+    margin: 0;
+  }
+
+  .main-table-containter {
+    border-radius: 3vmin;
+    background-color: #dbdbdb;
+    width: 100%;
+    padding: 1rem 1rem;
+    box-shadow: 0px 2px 5px 0px #00000033;
+    margin-top:30px;
+    margin-bottom:30px;
+
+  }
+
+  .title-table-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    align-items: center;
+    padding: 0rem 1.5rem;
+  }
+
+  .subtitle {
+    font-weight: 500;
+    letter-spacing: 3px;
+    font-size: large;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 50%);
+  
+  
+    
+  }
+
+  .select-button {
+    padding: 0.45rem 1rem;
+    padding-right: 1.5rem;
+    position: relative;
+    border-radius: 0.5rem;
+    border: 2px solid lightgrey;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0px 1px 2px 0px #0000003b, -1px 0px 2px 0px #ffffff33;
+  }
+
+  .select-button:after {
+    content: " ";
+    position: absolute;
+    height: 0.7vmin;
+    width: 0.7vmin;
+    border: 1px solid black;
+    border-bottom: none;
+    border-left: none;
+    right: 10%;
+    top: 30%;
+    transform: rotate(134deg);
+  }
+
+  .dot {
+    height: 15px;
+    width: 15px;
+  }
+
+  table {
+    width: 100%;
+    font-weight: 600;
+    font-size: 18px;
+    border-collapse: COLLAPSE;
+    color: #111111;
+    
+  }
+th{
+   padding: 30px;
+}
+  tr  {
+    transition: background-color 0.2s;
+
+  }
+  tr:hover {
+    background-color: #fffffd;
+  }
+  td {
+    padding: 1rem;
+    border: none;
+  }
+
+  td {
+    text-align: center;
+  }
+  td:first-child {
+    border-radius: 1.5rem 0rem 0rem 1.5rem;
+    text-align: left;
+  }
+
+  td:last-child {
+    border-radius: 0rem 1.5rem 1.5rem 0rem;
+  }
+
+  .icono-texto {
+    display: flex;
+    align-items: CENTER;
+  }
+
+  .icono-texto > div {
+    margin-left: 10px;
+  }
+  /* .contenedor-svg {
+    background-color: #000000;
+    border-radius: 0.7rem;
+    padding: 10px;
+  } */
+  /* .dolar {
+    height: 15px;
+    width: 15px;
+  } */
+
+  .pendiente {
+    background-color: #bdbdbd83;
+    color: #000000;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  /* .completado {
+    background-color: #e6ece9;
+    color: #80aba4;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .cancelado {
+    background-color: #f3dedc;
+    color: #0e0c0c;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  } */
+
+
+
