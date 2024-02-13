@@ -65,27 +65,6 @@ const Dashboard = () => {
           </table>
         </div>
       </div>
-
-      {/* 
-      <h1>Dashboard</h1>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>email</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{user.email}</td>
-              <td>{user.name}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table> */}
     </div>
   );
 };

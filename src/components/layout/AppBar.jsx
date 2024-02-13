@@ -135,5 +135,4 @@ function AppBar() {
         </Navbar>
     );
 }
-
-export default AppBar;
+export  default AppBar;
