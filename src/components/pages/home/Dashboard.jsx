@@ -15,7 +15,9 @@ const Dashboard = () => {
           url: "users",
           method: "GET",
           token: localStorage.getItem("token"),
+
         });
+        console.log(response.data)
         setUsers(response.data);
         setLoading(false);
       } catch (error) {
