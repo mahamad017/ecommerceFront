@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import styles from './home.module.scss'
+import { Link } from 'react-router-dom';
 
 function Product({ product }) {
     // https://placehold.co/180x100
@@ -16,6 +17,7 @@ function Product({ product }) {
                     Price: {product.price}$
                 </Card.Text>
                 <Button variant="primary">View</Button>
+                <Link to={ `editProduct/${product.id}` }><Button variant="success">Edit Product</Button></Link>
             </Card.Body>
         </Card>
     );

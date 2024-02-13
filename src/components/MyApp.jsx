@@ -8,6 +8,7 @@ import NoPage from "./pages/NoPage";
 import MyOrdersPage from "./pages/orders/MyOrdersPage"
 import { createContext, useState } from "react";
 import AddProduct from "./pages/home/AddProduct";
+import EditProduct from "./pages/home/EditProduct";
 import Dashboard from "./pages/home/Dashboard";
 
 export const AuthContext = createContext(false)
@@ -25,8 +26,9 @@ export default function MyApp() {
                             <>
                                 <Route path="user" element={<UserDetailsPage />} />
                                 <Route path="orders" element={ <MyOrdersPage /> } />
-                                <Route path="addProduct" element={ <AddProduct /> }/>
-                                <Route path="dashboard" element={<Dashboard />} />
+                                <Route path="addProduct" element={ <AddProduct /> } />
+                                <Route path="editProduct/:productId" element={ <EditProduct /> } />
+                                <Route path="dashboard" element={ <Dashboard /> } />
                             </>
                             :
                             <>
