@@ -12,64 +12,45 @@ import Api from '../../tools/api';
 import Loading from '../shared/Loading';
 
 function AppBar() {
-    // init cookies
     const [cookie, setCookie] = useCookies('token')
-
-    // init app state & token
     const appContext = useContext(AppContext)
     let token
 
-    // init state
     const [search, setSearch] = useState('')
     const [loading, setLoading] = useState(false)
 
-    // check login state
     const checkLogin = async () => {
-        // init token
         token = appContext.appState.token != null ? appContext.appState.token : cookie?.token
-
-        // check if we have token or not        
         if (token == null || token == '') return;
 
-        // show loading
         setLoading(true)
 
-        // get user details
         const res = await Api.fetch({ url: 'user', token })
 
-        // check response if success => login locally        
         if (res != null && res.email != null) {
             appContext.login(token, res)
         }
-        // logout locally
         else {
             appContext.logout()
             setCookie('token', null)
         }
-
-        // hide loading
-        setLoading(false)
+                setLoading(false)
     }
     useEffect(() => {
         checkLogin()
     }, [])
 
-    // logout callback
     const onLogout = async () => {
-        // reset cookie        
         setCookie('token', null)
 
-        // check token
         token = appContext.appState.token != null ? appContext.appState.token : cookie?.token
         if (token == null) return;
 
-        // call api to remove the token
         await Api.fetch({ method: 'PUT', url: 'logout', token })
 
-        // reset app state
         appContext.logout()
 
-        console.log('window.location.href');//ss
+        console.log('window.location.href');
         console.log(window.location.href);
         window.location.href = '/login'
         console.log(window.location.href);
