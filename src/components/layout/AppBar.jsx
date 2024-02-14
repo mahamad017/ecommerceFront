@@ -80,6 +80,7 @@ function AppBar() {
                                         </Link></>
                                     :
                                     <>
+                                        
                                         <Link to='user' className='nav-link' >
                                             My Details
                                         </Link>
