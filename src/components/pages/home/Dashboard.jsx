@@ -52,9 +52,9 @@ const Dashboard = () => {
 
     return (
         <div>
-            <div class="main-table-containter ">
-                <div class="title-table-container">
-                    <div class="subtitle">USERS</div>
+            <div className="main-table-containter ">
+                <div className="title-table-container">
+                    <div className="subtitle">USERS</div>
                 </div>
                 <div>
                     <table>
@@ -69,7 +69,7 @@ const Dashboard = () => {
                                     <td> {index + 1}</td>
 
                                     <td>
-                                        <div class="pendiente">{user.email}</div>
+                                        <div className="pendiente">{user.email}</div>
                                     </td>
                                     <td>{user.name}</td>
                                     <td>
