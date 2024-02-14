@@ -113,44 +113,11 @@ return (
             </option>
             ))}
         </Form.Control>
-</Form.Group>
-        <Form.Group className="mb-3" controlId="fromBasicName">
-            <Form.Label>Product Name</Form.Label>
-            <Form.Control type="text" placeholder="Product Name"
-                onChange={(e) => {
-                    setState({ ...state, name: e.target.value })
-                }}
-            />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="fromBasicDescription">
-            <Form.Label>Product Description</Form.Label>
-            <Form.Control type="text" placeholder="Describe The Product"
-                onChange={(e) => {
-                    setState({ ...state, description: e.target.value })
-                }}
-            />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="fromBasicImage">
-            <Form.Label>Image URL</Form.Label>
-            <Form.Control type="text" placeholder="Put Image Url"
-                onChange={(e) => {
-                    setState({ ...state, image: e.target.value })
-                }}
-            />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="fromBasicPrice">
-            <Form.Label>Price</Form.Label>
-            <Form.Control type="number" placeholder="Product Price"
-                onChange={(e) => {
-                    setState({ ...state, price: e.target.value })
-                }}
-                
-            />
-            </Form.Group>
-            <Button onClick={(e) => {
-                    callAddProduct()
-                    e.preventDefault()
-                }} variant="primary" type="submit">
+    </Form.Group>
+    <Button onClick={(e) => {
+            callAddProduct()
+            e.preventDefault()
+        }} variant="primary" type="submit">
         Submit
     </Button>
     </Form>
