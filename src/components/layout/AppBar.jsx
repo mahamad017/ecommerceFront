@@ -57,46 +57,49 @@ function AppBar() {
     }
 
     return (
-        <Navbar expand="lg" className={styles.appbar + ' ' + "bg-body-tertiary"}>
+        <Navbar expand="lg" className={styles.appbar + " " + "bg-body-tertiary"}>
             <Container fluid>
                 {/* <Navbar.Brand href="/">My Store</Navbar.Brand> */}
-                <Link to='/' className='navbar-brand' >My Store</Link>
+                <Link to="/" className="navbar-brand">
+                    My Store
+                </Link>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
-                    <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
-                        navbarScroll
-                    >
-                        {loading ? <Loading /> :
+                    <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
+                        {loading ? (
+                            <Loading />
+                        ) : (
                             <>
-                                {appContext.appState.user == null ?
+                                {appContext.appState.user == null ? (
                                     <>
-                                        <Link to='register' className='nav-link' >
+                                        <Link to="register" className="nav-link">
                                             Register
                                         </Link>
-                                        <Link to='login' className='nav-link' >
+                                        <Link to="login" className="nav-link">
                                             Login
-                                        </Link></>
-                                    :
+                                        </Link>
+                                    </>
+                                ) : (
                                     <>
-                                        
-                                        <Link to='user' className='nav-link' >
+                                        <Link to="user" className="nav-link">
                                             My Details
                                         </Link>
-                                        <Link to='orders' className='nav-link' >
+                                        <Link to="orders" className="nav-link">
                                             My Orders
                                         </Link>
-                                        <Link onClick={onLogout} className='nav-link' >
+                                        <Link onClick={onLogout} className="nav-link">
                                             Logout
                                         </Link>
-                                        <Link to='dashboard' className='dropdown-item' >
-                                        Users
-                                    </Link>
+                                        <Link to="dashboard" className="nav-link">
+                                            Users
+                                        </Link>
+                                        <Link to="categories" className="nav-link">
+                                            CategoriesAction
+                                        </Link>
                                     </>
-                                }
+                                )}
                             </>
-                        }
+                        )}
                     </Nav>
                     <Form className="d-flex">
                         <Form.Control
@@ -105,12 +108,17 @@ function AppBar() {
                             className="me-2"
                             aria-label="Search"
                             onChange={(e) => {
-                                setSearch(e.target.value)
+                                setSearch(e.target.value);
                             }}
                         />
-                        <Button onClick={(e) => {
-                            appContext.setSearch(search)
-                        }} variant="outline-success">Search</Button>
+                        <Button
+                            onClick={(e) => {
+                                appContext.setSearch(search);
+                            }}
+                            variant="outline-success"
+                        >
+                            Search
+                        </Button>
                     </Form>
                 </Navbar.Collapse>
             </Container>

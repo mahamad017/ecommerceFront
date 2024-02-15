@@ -11,6 +11,8 @@ import AddProduct from "./pages/home/AddProduct";
 import EditProduct from "./pages/home/EditProduct";
 import Dashboard from "./pages/home/Dashboard";
 import Product from "./pages/home/Product";
+import CategoriesAction from "./pages/home/CategoriesAction";
+import Addcategory from "./pages/home/addcategory";
 
 export const AuthContext = createContext(false)
 
@@ -19,19 +21,19 @@ export default function MyApp() {
 
     return (
         <AuthContext.Provider value={{ authState, setAuthState }}>
-    
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<HomePage />} />
                         {authState ? (
                             <>
-                                
                                 <Route path="user" element={<UserDetailsPage />} />
                                 <Route path="orders" element={<MyOrdersPage />} />
                                 <Route path="addProduct" element={<AddProduct />} />
                                 <Route path="editProduct/:productId" element={<EditProduct />} />
                                 <Route path="dashboard" element={<Dashboard />} />
+                                <Route path="categories" element={<CategoriesAction />} />
+                                <Route path="addcategory" element={<Addcategory />} />
                             </>
                         ) : (
                             <>

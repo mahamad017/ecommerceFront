@@ -26,6 +26,7 @@ export default function Categories({ categories }) {
                         }
                         return <ListGroup.Item key={el.id} className={classX} onClick={updateCategory}>{el.name} </ListGroup.Item>
                     })}
+                    
         </ListGroup>
     );
 }
