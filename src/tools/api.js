@@ -10,83 +10,69 @@ export default class Api {
      * @param {showPopup} function to show error/response message
      * @returns Promise
      */
-    static async fetch({
-        url,
-        params,
-        showPopup,
-        method,
-        customMessage,
-        body,
-        token,
-    }) {
+    static async fetch({ url, params, showPopup, method, customMessage, body, token }) {
         // init params
         url = this.baseUrl + url;
 
         // call API
         let res;
         try {
-        // set params
+            // set params
             if (params != null) url = `${url}?${new URLSearchParams(params)}`;
-        // set header
-        const headers = {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        };
-        if (token != null) {
-            headers["Authorization"] = `Bearer ${token}`;
-        }
+            // set header
+            const headers = {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            };
+            if (token != null) {
+                headers["Authorization"] = `Bearer ${token}`;
+            }
 
-        // check method
-        if (method == null || method == "GET") {
-            res = await fetch(url, { headers: headers });
-        } else if (method === "POST" || method === "PUT" || method === "DELETE") {
-            res = await fetch(url, {
-            method: method,
-            body: body != null ? JSON.stringify(body) : body,
-            headers: headers,
-            });
-            // log response
-            console.log(res);
-        }
+            // check method
+            if (method == null || method == "GET") {
+                res = await fetch(url, { headers: headers });
+            } else if (method === "POST" || method === "PUT" || method === "DELETE") {
+                res = await fetch(url, {
+                    method: method,
+                    body: body != null ? JSON.stringify(body) : body,
+                    headers: headers,
+                });
+                // log response
+                console.log(res);
+            }
         } catch (e) {
-        // log error
-        console.log(e);
-        if (res) {
-            console.log(await res.text());
-        }
-        return null;
+            // log error
+            console.log(e);
+            if (res) {
+                console.log(await res.text());
+            }
+            return null;
         }
 
         if (res == null) {
-        // show error message
-        if (showPopup != null)
-            showPopup(
-            customMessage ??
-                "Something went wrong while retriving data from Server!"
-            );
-        return null;
+            // show error message
+            if (showPopup != null) showPopup(customMessage ?? "Something went wrong while retriving data from Server!");
+            return null;
         }
 
         // check the resposne
         if (res.ok) {
-        // resposne was success
-        const response = await res.json(); // convert object
-        if (showPopup != null) showPopup(response.message); // show response message
+            // resposne was success
+            const response = await res.json(); // convert object
+            if (showPopup != null) showPopup(response.message); // show response message
             return response;
         } else {
-        // init error response
-        let response;
-        try {
-            response = await res.json();
-        } catch (e) {
-            console.log(e);
-        }
-
-        // show error message
+            // init error response
+            let response;
+            try {
+                response = await res.json();
+            } catch (e) {
+                console.log(e);
+            }
+            console.log(response);
+            // show error message
             if (showPopup != null) {
-                let message =
-                customMessage ??
-                "Something went wrong while retriving data from Server!";
+                let message = customMessage ?? "Something went wrong while retriving data from Server!";
                 if (response?.message != null) message = response.message;
                 showPopup(message);
             }
