@@ -38,6 +38,7 @@ function Product({ product }) {
     
     return (
         <>
+        
             <Card className={styles.product}>
                 <Card.Img className={styles.image} variant="top" src={product.image} />
                 <Card.Body>

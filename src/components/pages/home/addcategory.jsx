@@ -12,9 +12,8 @@ export default function AddProduct() {
     const callAddProduct = async () => {
         if (
             state.name == null ||
-            state.name.length === 0 ||
-            state.description == null ||
-            state.description.length === 0 
+            state.description == null 
+         
         ) {
             appContext.showPopup("Please enter all element values");
             return;
@@ -22,10 +21,11 @@ export default function AddProduct() {
 
         try {
             const response = await Api.fetch({
-                url: "addcategories",
+                url: "add-categories",
                 body: state,
                 method: "POST",
                 showPopup: appContext.showPopup,
+                token:localStorage.getItem('token')
             });
             console.log(response);
             if (response != null) {
@@ -35,7 +35,7 @@ export default function AddProduct() {
             console.error(error);
             appContext.showPopup("An error occurred. Please try again later.");
         }
-        window.location.href = "/";
+      //  window.location.href = "/";
     };
 
     // const getCategories = async () => {
@@ -63,6 +63,16 @@ export default function AddProduct() {
                         type="text"
                         placeholder="Product Name"
                         onChange={(e) => {
+                            setState({ ...state, id: e.target.value });
+                        }}
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Product Name</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Product Name"
+                        onChange={(e) => {
                             setState({ ...state, name: e.target.value });
                         }}
                     />
@@ -77,7 +87,7 @@ export default function AddProduct() {
                         }}
                     />
                 </Form.Group>
-                
+
                 <Button
                     onClick={(e) => {
                         callAddProduct();
