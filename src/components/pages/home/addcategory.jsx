@@ -35,24 +35,9 @@ export default function AddProduct() {
             console.error(error);
             appContext.showPopup("An error occurred. Please try again later.");
         }
-      //  window.location.href = "/";
+        window.location.href = "/";
     };
 
-    // const getCategories = async () => {
-    //     try {
-    //         const response = await Api.fetch({ url: "categories" });
-
-    //         if (response != null && Array.isArray(response.data)) {
-    //             setCategories(response.data);
-    //         }
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     getCategories();
-    // }, []);
 
     return (
         <>
