@@ -13,12 +13,13 @@ import Loading from '../shared/Loading';
 import { Badge } from 'react-bootstrap';
 
 function AppBar() {
+    
     const [cookie, setCookie] = useCookies('token')
+    const [statistics, setStatistics] = useState([]);
     const appContext = useContext(AppContext)
+        const [search, setSearch] = useState('')
+        const [loading, setLoading] = useState(false)
     let token
-
-    const [search, setSearch] = useState('')
-    const [loading, setLoading] = useState(false)
 
     const checkLogin = async () => {
         token = appContext.appState.token != null ? appContext.appState.token : cookie?.token
@@ -36,26 +37,39 @@ function AppBar() {
             setCookie('token', null)
         }
                 setLoading(false)
-    }
+            }
     useEffect(() => {
-        checkLogin()
+    checkLogin()
+    getStatistics()
     }, [])
+            
+            const onLogout = async () => {
+                setCookie('token', null)
+                
+                token = appContext.appState.token != null ? appContext.appState.token : cookie?.token
+                if (token == null) return;
+                
+                await Api.fetch({ method: 'PUT', url: 'logout', token })
+                
+                appContext.logout()
+                
+                console.log('window.location.href');
+                console.log(window.location.href);
+                window.location.href = '/login'
+                console.log(window.location.href);
+            };
+        const getStatistics = async () => {
+                    // call API
+        const response = await Api.fetch({
+            url: 'statistics'
+            });
 
-    const onLogout = async () => {
-        setCookie('token', null)
-
-        token = appContext.appState.token != null ? appContext.appState.token : cookie?.token
-        if (token == null) return;
-
-        await Api.fetch({ method: 'PUT', url: 'logout', token })
-
-        appContext.logout()
-
-        console.log('window.location.href');
-        console.log(window.location.href);
-        window.location.href = '/login'
-        console.log(window.location.href);
-    }
+                    // check response
+        if (response != null) 
+        console.log(response);
+        setStatistics(response.data); // update state with recevied categories
+        };
+    
 
     return (
         <Navbar expand="lg" className={styles.appbar + " " + "bg-body-tertiary"}>
@@ -85,17 +99,17 @@ function AppBar() {
                                         <Link onClick={onLogout} className="nav-link mt-1">
                                             Logout
                                         </Link>
-                                        <Link to="user" className="nav-link">
-                                            My Details<Badge bg="secondary m-2">9</Badge>
+                                        <Link to="user" className="nav-link mt-1">
+                                            My Details
                                         </Link>
                                         <Link to="orders" className="nav-link">
-                                            My Orders <Badge bg="secondary m-2">9</Badge>
+                                            My Orders <Badge bg="secondary m-2">0{statistics["order"]}</Badge>
                                         </Link>
                                         <Link to="dashboard" className="nav-link">
-                                            Users <Badge bg="secondary m-2">9</Badge>
+                                            Users <Badge bg="secondary m-2">{statistics["user"]}</Badge>
                                         </Link>
                                         <Link to="categories" className="nav-link">
-                                            CategoriesAction <Badge bg="secondary m-2">9</Badge>
+                                            CategoriesAction <Badge bg="secondary m-2">{statistics["category"]}</Badge>
                                         </Link>
                                     </>
                                 )}
