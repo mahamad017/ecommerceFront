@@ -8,14 +8,15 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import CategoriesAction from "./CategoriesAction";
 
-export default function HomePage() {
+
+export default function Home() {
     // init app state
     const appContext = useContext(AppContext);
-
+    console.log(appContext.cart)
     // init categories & other states
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
-
+    const setCart = appContext.setCart;
     // set fetching categories from API function
     const getCategories = async () => {
         // call API
@@ -24,6 +25,9 @@ export default function HomePage() {
         // check response
         if (response != null) setCategories(response.data); // update state with recevied categories
     };
+useEffect(() => {
+  console.log(appContext.cart); // Check updated cart state
+}, [appContext.cart]);
 
     // set fetching products from API function
     const getProducts = async () => {
@@ -51,27 +55,28 @@ export default function HomePage() {
             }
             setProducts(productsRes); // update state with recevied products
         }
+        console.log(appContext.cart)
     };
 
     // set effect functionalities
     useEffect(() => {
         // component did mount => get & update categories from back-end
-        if (categories.length == 0) getCategories();
+        if (categories.length === 0) getCategories();
         getProducts();
     }, [appContext.appState.search, appContext.appState.category]);
 
     return (
         <div className={styles.home}>
-            <Categories categories={categories} />
-            {products == null || products.length == 0 ? (
-                <h1>No Product has been found!</h1>
-            ) : (
-                <div className={styles.products}>
-                    {products.map((el, index) => (
-                        <Product key={el.id} product={el} />
-                    ))}
-                </div>
-            )}
+            <Categories categories={ categories } />
+                {products == null || products.length == 0 ? (
+                    <h1>No Product has been found!</h1>
+                ) : (
+                    <div className={styles.products}>
+                        {products.map((el, index) => (
+                            <Product key={el.id} product={el} setCart={setCart} />
+                        ))}
+                    </div>
+                ) }
             <div>
                 <Link to="addProduct" className="mx-auto">
                     <Button varient="outline-primary">addProduct +</Button>

@@ -13,12 +13,12 @@ export default function AddProduct() {
         if (
             state.name == null ||
             state.description == null 
-         
+        
         ) {
             appContext.showPopup("Please enter all element values");
             return;
         }
-
+// todo : token from cookie
         try {
             const response = await Api.fetch({
                 url: "add-categories",

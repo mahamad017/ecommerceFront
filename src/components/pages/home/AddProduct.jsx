@@ -3,11 +3,14 @@ import Form from "react-bootstrap/Form";
 import Api from "../../../tools/api";
 import { AppContext } from "../../layout/Layout";
 import Button from "react-bootstrap/Button";
+import { useCookies } from 'react-cookie';
 
 export default function AddProduct() {
 const [state, setState] = useState({});
 const [categories, setCategories] = useState([]);
 const appContext = useContext(AppContext);
+const [cookies] = useCookies(['token']);
+const token = cookies.token;
 
 const callAddProduct = async () => {
 if (
@@ -26,6 +29,7 @@ try {
     url: "addProduct",
     body: state,
     method: "POST",
+    token: token,
     showPopup: appContext.showPopup,
     });
     console.log(response)

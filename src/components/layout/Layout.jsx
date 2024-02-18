@@ -2,11 +2,10 @@ import { Outlet } from "react-router-dom";
 import AppBar from "./AppBar";
 import Footer from "./Footer";
 import styles from './layout.module.scss'
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AuthContext } from "../MyApp";
-import CategoriesAction from "../pages/home/CategoriesAction";
 
 export const AppContext = createContext({})
 
@@ -21,16 +20,22 @@ export default function Layout() {
         category: null,
         user: null,
         token: null, // cookie
-        cart: [{ id: 1, qty: 2 }] // cookie
+        cart: [] // cookie
     })
     const closePopup = () => setAppState({ ...appState, popup: { show: false } });
     const showPopup = (msg) => setAppState({ ...appState, popup: { message: msg, show: true } });
     const setSearch = (newText) => setAppState({ ...appState, search: newText })
     const setCategory = (newCategory) => setAppState({ ...appState, category: newCategory })
+    const setCart = ({ id, qty }) => {
+        const newCart = [...appState.cart]; // Deep copy the cart array
+        newCart.push({ id, qty }); // Add the new product
+        setAppState({ ...appState, cart: newCart });
+    };
     const login = (token, user) => {
         authContext.setAuthState(true)
         setAppState({ ...appState, token, user })
     }
+    console.log(appState)
     const logout = () => {
         authContext.setAuthState(false)
         setAppState({ ...appState, token: null, user: null })
@@ -44,6 +49,7 @@ export default function Layout() {
                 showPopup,
                 setSearch,
                 setCategory,
+                setCart,
                 // setToken, setUser
                 login,
                 logout,

@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Api from "../../../tools/api";
 import { AppContext } from "../../layout/Layout";
 import Button from "react-bootstrap/Button";
+import { useCookies } from 'react-cookie';
 
 
 export default function EditProduct() {
@@ -18,6 +19,8 @@ const [categories, setCategories] = useState([]);
 const [product, setProduct] = useState({});
 const appContext = useContext(AppContext);
 const { productId } = useParams();
+const [cookies] = useCookies(['token']);
+const token = cookies.token;
 
 const callEditProduct = async () => {
     console.log(state)
@@ -37,6 +40,7 @@ const callEditProduct = async () => {
         url: `editProduct/${productId}`,
         body: state,
         method: "PUT",
+        token: token,
         showPopup: appContext.showPopup,
         });
         console.log(response)

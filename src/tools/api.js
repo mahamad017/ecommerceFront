@@ -29,7 +29,7 @@ export default class Api {
             }
 
             // check method
-            if (method == null || method == "GET") {
+            if (method == null || method === "GET") {
                 res = await fetch(url, { headers: headers });
             } else if (method === "POST" || method === "PUT" || method === "DELETE") {
                 res = await fetch(url, {

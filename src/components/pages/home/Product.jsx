@@ -1,28 +1,37 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import styles from "./home.module.scss";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
 import { AuthContext } from "../../MyApp";
 import Api from "../../../tools/api";
 import { AppContext } from "../../layout/Layout";
+import { useCookies } from 'react-cookie';
 
-function Product({ product }) {
+
+function Product({ product, setCart }) {
     const { authState } = useContext(AuthContext);
     const [showModal, setShowModal] = useState(false);
-    const [state, setState] = useState({});
     const appContext = useContext(AppContext);
-
+    const [cookies] = useCookies(['token']);
+    const token = cookies.token;
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
+
+    const handleSetCart = (id, qty) => {
+        console.log('product id:', id);
+        console.log('product qty:', qty);
+        setCart({ id, qty });
+        console.log('appContext.cart after update:', appContext.cart);
+    }
+
     const deleteProduct = async (id) => {
         try {
             const response = await Api.fetch({
             url: `deleteProduct/${id}`,
-            body: state,
             method: "DELETE",
+            token: token,
             showPopup: appContext.showPopup,
             });
             console.log(response)
@@ -38,7 +47,6 @@ function Product({ product }) {
     
     return (
         <>
-        
             <Card className={styles.product}>
                 <Card.Img className={styles.image} variant="top" src={product.image} />
                 <Card.Body>
@@ -53,12 +61,14 @@ function Product({ product }) {
                                 <Button variant="primary">Edit</Button>
                             </Link>
                             <Button variant="danger" onClick={ () => deleteProduct(product.id) }>Delete</Button>
+                                <Button variant="success" onClick={ () => handleSetCart( product.id, 1 )}>
+                                Add to Cart
+                            </Button>
                         </>
                         )}
                     </div>
                 </Card.Body>
             </Card>
-
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>{product.name}</Modal.Title>
