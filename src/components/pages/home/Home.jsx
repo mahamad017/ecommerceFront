@@ -81,7 +81,7 @@ useEffect(() => {
                 <Link to="addProduct" className="mx-auto">
                     <Button varient="outline-primary">addProduct +</Button>
                 </Link>
-                <Link to="addcategory" className="mx-auto">
+                <Link to="adduser" className="mx-auto">
                     <Button varient="outline-primary">addcategory +</Button>
                 </Link>
             </div>

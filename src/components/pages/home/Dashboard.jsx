@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import Api from "../../../tools/api";
 import styles from "./style.css";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
@@ -81,6 +82,13 @@ const Dashboard = () => {
                             ))}
                         </tbody>
                     </table>
+                    <div style={{ position: "fixed", bottom: "70px", right: "40px", zIndex: "1000" }}>
+                        <Link to="adduser">
+                            <button className="btn btn-secondary shadow-lg rounded btn-lg " pill style={{ width: "50px", height: "50px" }}>
+                                +
+                            </button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

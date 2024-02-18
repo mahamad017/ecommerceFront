@@ -13,6 +13,7 @@ import Dashboard from "./pages/home/Dashboard";
 import CategoriesAction from "./pages/home/CategoriesAction";
 import Addcategory from "./pages/home/addcategory";
 import Cart from "./pages/home/Cart";
+import Adduser from "./pages/home/Adduser";
 
 export const AuthContext = createContext(false)
 
@@ -40,6 +41,7 @@ export default function MyApp() {
                                 <Route path="categories" element={<CategoriesAction />} />
                                 <Route path="addcategory" element={ <Addcategory /> } />
                                 <Route path="cart" element={ <Cart /> } />
+                                <Route path="dashboard/adduser" element={<Adduser />} />
                             </>
                         ) : (
                             <>
