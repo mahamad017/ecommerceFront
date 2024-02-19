@@ -33,11 +33,9 @@ const CtategoriesAction = () => {
                 method: "DELETE",
                 token: localStorage.getItem("token"),
             });
-            console.log("response", response);
 
             fetchcat();
         } catch (error) {
-            console.log(error);
             setErr(error);
         }
     };

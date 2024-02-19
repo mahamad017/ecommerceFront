@@ -32,7 +32,6 @@ try {
     token: token,
     showPopup: appContext.showPopup,
     });
-    console.log(response)
     if (response != null) {
     appContext.showPopup(response.message);
     }

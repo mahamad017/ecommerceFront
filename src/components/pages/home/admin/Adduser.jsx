@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { AppContext } from "../../layout/Layout";
-import Api from "../../../tools/api";
+import { AppContext } from "../../../layout/Layout";
+import Api from "../../../../tools/api";
 import { Button, Form } from "react-bootstrap";
 
 const Adduser = () => {
@@ -13,7 +13,6 @@ const Adduser = () => {
             appContext.showPopup("Please enter and confirm the password correctly");
             return;
         }
-        console.log("state"+state);
         try {
             const response = await Api.fetch({
                 url: "create-user",
@@ -22,7 +21,6 @@ const Adduser = () => {
                 showPopup: appContext.showPopup,
                 token: localStorage.getItem("token"),
             });
-            console.log(response);
             if (response != null) {
                 appContext.showPopup(response.message);
             }

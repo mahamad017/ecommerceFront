@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
-import Api from "../../../tools/api";
-import styles from "./style.css";
+import Api from "../../../../tools/api";
+import styles from "../style.css";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -34,11 +34,9 @@ const Dashboard = () => {
                 method: "DELETE",
                 token: localStorage.getItem("token"),
             });
-            console.log("response", response);
 
             fetchUsers();
         } catch (error) {
-            console.log(error);
             setError(error);
         }
     };

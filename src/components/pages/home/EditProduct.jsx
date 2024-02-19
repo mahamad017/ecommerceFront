@@ -23,7 +23,6 @@ const [cookies] = useCookies(['token']);
 const token = cookies.token;
 
 const callEditProduct = async () => {
-    console.log(state)
     if (
         state.name == null || state.name.length === 0 ||
         state.description == null || state.description.length === 0 ||
@@ -43,7 +42,6 @@ const callEditProduct = async () => {
         token: token,
         showPopup: appContext.showPopup,
         });
-        console.log(response)
         if (response != null) {
         appContext.showPopup(response.message);
         }

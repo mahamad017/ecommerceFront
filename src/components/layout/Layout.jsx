@@ -35,7 +35,6 @@ export default function Layout() {
         authContext.setAuthState(true)
         setAppState({ ...appState, token, user })
     }
-    console.log(appState)
     const logout = () => {
         authContext.setAuthState(false)
         setAppState({ ...appState, token: null, user: null })

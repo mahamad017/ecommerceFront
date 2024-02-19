@@ -67,16 +67,16 @@ useEffect(() => {
 
     return (
         <div className={styles.home}>
-            <Categories categories={ categories } />
-                {products == null || products.length == 0 ? (
-                    <h1>No Product has been found!</h1>
-                ) : (
-                    <div className={styles.products}>
-                        {products.map((el, index) => (
-                            <Product key={el.id} product={el} setCart={setCart} />
-                        ))}
-                    </div>
-                ) }
+            <Categories categories={categories} />
+            {products == null || products.length == 0 ? (
+                <h1>No Product has been found!</h1>
+            ) : (
+                <div className={styles.products}>
+                    {products.map((el, index) => (
+                        <Product key={el.id} product={el} setCart={setCart} />
+                    ))}
+                </div>
+            )}
             <div>
                 <Link to="addProduct" className="mx-auto">
                     <Button varient="outline-primary">addProduct +</Button>
@@ -85,6 +85,8 @@ useEffect(() => {
                     <Button varient="outline-primary">addcategory +</Button>
                 </Link>
             </div>
+
+
         </div>
     );
 }

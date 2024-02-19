@@ -14,7 +14,6 @@ export default function Cart() {
             body: cart,
             showPopup: appContext.showPopup,
             });
-            console.log(response)
             if (response != null) {
             appContext.showPopup(response.message);
             }
@@ -25,7 +24,6 @@ export default function Cart() {
         window.location.href = '/'
     };
   useEffect(() => {
-    console.log('cart in component:', appContext.cart);
   }, [appContext.cart]);
   return (
     <div>
