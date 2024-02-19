@@ -8,9 +8,11 @@ import { AuthContext } from "../../MyApp";
 import Api from "../../../tools/api";
 import { AppContext } from "../../layout/Layout";
 import { useCookies } from 'react-cookie';
+import { Eye, Trash } from "react-bootstrap-icons";
+import { Add, Edit } from "@mui/icons-material";
 
 
-function Product({ product, setCart }) {
+function Product({ product }) {
     const { authState } = useContext(AuthContext);
     const [showModal, setShowModal] = useState(false);
     const appContext = useContext(AppContext);
@@ -18,14 +20,23 @@ function Product({ product, setCart }) {
     const token = cookies.token;
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
-
-    const handleSetCart = (id, qty) => {
-        console.log('product id:', id);
-        console.log('product qty:', qty);
-        setCart({ id, qty });
-        console.log('appContext.cart after update:', appContext.cart);
+    const [cart,setCart] = useState([{}])
+    const [totalCartBalance, setTotalCartBalance] = useState(0);
+    
+    const handleSetCart = (id, name, qty,price) => {
+              const newCartContent = [...cart, { id, name, qty,price }];
+              setCart(newCartContent);
+              setTotalCartBalance(totalCartBalance + price);
     }
+    const handelRemoveCartProdact = (id ,price) => {
 
+       let temp;
+       const indexToRemove = cart.findIndex((item) => item.id === id);
+       (indexToRemove !== -1) ? temp = [...cart.slice(0, indexToRemove), ...cart.slice(indexToRemove + 1)] :temp = cart; 
+        setCart(temp)
+        setTotalCartBalance(totalCartBalance - price);
+
+    }
     const deleteProduct = async (id) => {
         try {
             const response = await Api.fetch({
@@ -52,27 +63,23 @@ function Product({ product, setCart }) {
                 <Card.Body>
                     <Card.Title className="mb-5">{product.name}</Card.Title>
                     <div className="d-flex justify-content-between">
-                        <div className={styles.productButton}>
-                            <Button variant="outline-warning" onClick={handleShowModal}>
-                                View
-                            </Button>
+                        <div className={styles.icons} variant="primary" onClick={handleShowModal}>
+                            <Eye size={15} />
                         </div>
-                        { authState && (
-                        <>
-                            <div className={styles.productButton}>
+                        {authState && (
+                            <>
                                 <Link to={`editProduct/${product.id}`}>
-                                    <Button variant="outline-light">Edit</Button>
+                                    <div className={styles.icons} variant="primary">
+                                        <Edit size={15} />
+                                    </div>
                                 </Link>
-                            </div>
-                            <div className={styles.productButton}>
-                                <Button variant="outline-warning" onClick={ () => handleSetCart( product.id, 1 )}>
-                                    Add to Cart
-                                </Button>
-                            </div>
-                            <div className={styles.productButton}>
-                                <Button variant="outline-danger" onClick={ () => deleteProduct(product.id) }>Delete</Button>
-                            </div>
-                        </>
+                                <div className={styles.icons} variant="danger" onClick={() => deleteProduct(product.id)}>
+                                    <Trash color="red" size={15} />
+                                </div>
+                                <div className={styles.icons} variant="primary" onClick={() => handleSetCart(product.id, product.name, 1, product.price)}>
+                                    <Add size={15} />
+                                </div>
+                            </>
                         )}
                     </div>
                 </Card.Body>
@@ -93,6 +100,33 @@ function Product({ product, setCart }) {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <div className={styles.product}></div>
+            <div className={styles.cartContainer}>
+                <>
+                    {!cart ? (
+                        ""
+                    ) : (
+                        <>
+                            {cart.map((item) => (
+                                <div className={styles.dataContainer} key={item.id}>
+                                    <div className={styles.name}>{item.name}</div>
+                                    <div className={styles.qty}>{item.qty}</div>
+                                    <div className={styles.qty}>{item.price}</div>
+
+                                    <div
+                                        onClick={() => {
+                                            handelRemoveCartProdact(product.id, product.price);
+                                        }}
+                                    >
+                                        <Trash color="red" size={15} />
+                                    </div>
+                                </div>
+                            ))}
+                        </>
+                    )}
+                </>
+                <div className={styles.totalPrice}>Total Price: {totalCartBalance} </div>
+            </div>
         </>
     );
 }

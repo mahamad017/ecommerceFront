@@ -11,6 +11,7 @@ import { useCookies } from "react-cookie";
 import Api from "../../tools/api";
 import Loading from "../shared/Loading";
 import { Badge } from "react-bootstrap";
+import DashboardAdmin from "../pages/home/admin/DashboardAdmin";
 
 function AppBar() {
     const [cookie, setCookie] = useCookies("token");
@@ -53,10 +54,7 @@ function AppBar() {
 
         appContext.logout();
 
-        console.log("window.location.href");
-        console.log(window.location.href);
         window.location.href = "/login";
-        console.log(window.location.href);
     };
     const getStatistics = async () => {
         // call API
@@ -65,7 +63,7 @@ function AppBar() {
         });
 
         // check response
-        if (response != null) console.log(response);
+        if (response != null)
         setStatistics(response.data); // update state with recevied categories
     };
 
@@ -94,29 +92,29 @@ function AppBar() {
                                     </>
                                 ) : (
                                     <>
-                                    {/* {(request != "admin") ?( */}
+                                        {/* {(request === "") ?( */}
                                         <>
-                                        <Link onClick={onLogout} className="nav-link mt-1">
-                                            Logout
-                                        </Link>
-                                        <Link to="user" className="nav-link mt-1">
-                                            My Details
-                                        </Link>
-                                        <Link to="orders" className="nav-link">
-                                            My Orders <Badge bg="secondary m-2">0{statistics["order"]}</Badge>
-                                        </Link>
-                                    </> 
-                                    {/* ):( */}
-                                    <>
-                                        <Link to="categories" className="nav-link">
-                                            CategoriesAction <Badge bg="secondary m-2">{statistics["category"]}</Badge>
-                                        </Link>
-                                        <Link to="dashboard" className="nav-link">
-                                            Users <Badge bg="secondary m-2">{statistics["user"]}</Badge>
-                                        </Link>
+                                            <Link onClick={onLogout} className="nav-link mt-1">
+                                                Logout
+                                            </Link>
+                                            <Link to="user" className="nav-link mt-1">
+                                                My Details
+                                            </Link>
+                                            <Link to="orders" className="nav-link">
+                                                My Orders <Badge bg="secondary m-2">0{statistics["order"]}</Badge>
+                                            </Link>
+                                            <Link to="categories" className="nav-link">
+                                                CategoriesAction <Badge bg="secondary m-2">{statistics["category"]}</Badge>
+                                            </Link>
+                                            {/* <Link to="dashboard" className="nav-link">
+                                                Users <Badge bg="secondary m-2">{statistics["user"]}</Badge>
+                                            </Link> */}
+                                            <Link to="DashboardAdmin" className="nav-link m-2">
+                                                Dashboard
+                                            </Link>
+                                        </>
+                                        {/* ):(                                   */}
                                     </>
-                                {/* )} */}
-                                </>
                                 )}
                             </>
                         )}

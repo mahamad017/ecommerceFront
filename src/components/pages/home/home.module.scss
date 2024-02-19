@@ -38,4 +38,32 @@
             }
         }
     }
+
+}
+
+
+
+.cartContainer{
+border: #0000003f 1px solid;
+position: absolute;
+inset-inline-end: 10px;
+inset-block-start: 40%;
+padding: 10px;
+display: flex;
+flex-direction: column;
+gap: 0.5em;
+.dataContainer{
+border: #0000003f 1px solid;
+    display: flex;
+    gap: 1em;
+    padding-inline: 0.5em;
+}
+}
+.icons{
+    border: #0000003f 1px solid;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
 }

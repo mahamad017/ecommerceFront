@@ -37,15 +37,9 @@ export default class Api {
                     body: body != null ? JSON.stringify(body) : body,
                     headers: headers,
                 });
-                // log response
-                console.log(res);
             }
         } catch (e) {
-            // log error
-            console.log(e);
-            if (res) {
-                console.log(await res.text());
-            }
+         
             return null;
         }
 
@@ -67,9 +61,7 @@ export default class Api {
             try {
                 response = await res.json();
             } catch (e) {
-                console.log(e);
             }
-            console.log(response);
             // show error message
             if (showPopup != null) {
                 let message = customMessage ?? "Something went wrong while retriving data from Server!";

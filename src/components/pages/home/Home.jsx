@@ -85,6 +85,8 @@ useEffect(() => {
                     <Button className={styles.addButtons} variant="dark" size="lg">addcategory +</Button>
                 </Link>
             </div>
+
+
         </div>
     );
 }

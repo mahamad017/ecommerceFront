@@ -27,7 +27,6 @@ export default function AddProduct() {
                 showPopup: appContext.showPopup,
                 token:localStorage.getItem('token')
             });
-            console.log(response);
             if (response != null) {
                 appContext.showPopup(response.message);
             }

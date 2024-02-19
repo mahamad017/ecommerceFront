@@ -21,7 +21,6 @@ export default function MyOrdersPage() {
                 method: "GET",
                 token: token,
             });
-            console.log(response)
             if (response != null) {
             setOrders(response.data)
             }
