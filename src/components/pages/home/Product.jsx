@@ -52,18 +52,26 @@ function Product({ product, setCart }) {
                 <Card.Body>
                     <Card.Title className="mb-5">{product.name}</Card.Title>
                     <div className="d-flex justify-content-between">
-                        <Button variant="primary" onClick={handleShowModal}>
-                            View
-                        </Button>
+                        <div className={styles.productButton}>
+                            <Button variant="outline-warning" onClick={handleShowModal}>
+                                View
+                            </Button>
+                        </div>
                         { authState && (
                         <>
-                            <Link to={`editProduct/${product.id}`}>
-                                <Button variant="primary">Edit</Button>
-                            </Link>
-                            <Button variant="danger" onClick={ () => deleteProduct(product.id) }>Delete</Button>
-                                <Button variant="success" onClick={ () => handleSetCart( product.id, 1 )}>
-                                Add to Cart
-                            </Button>
+                            <div className={styles.productButton}>
+                                <Link to={`editProduct/${product.id}`}>
+                                    <Button variant="outline-light">Edit</Button>
+                                </Link>
+                            </div>
+                            <div className={styles.productButton}>
+                                <Button variant="outline-warning" onClick={ () => handleSetCart( product.id, 1 )}>
+                                    Add to Cart
+                                </Button>
+                            </div>
+                            <div className={styles.productButton}>
+                                <Button variant="outline-danger" onClick={ () => deleteProduct(product.id) }>Delete</Button>
+                            </div>
                         </>
                         )}
                     </div>

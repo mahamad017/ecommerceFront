@@ -85,9 +85,9 @@ useEffect(() => {
 
 return (
     <>
-    <Form>
-        <Form.Group className="mb-3" controlId="formBasicName">
-        <Form.Label>Product Name</Form.Label>
+    <Form className="border border-3 border-warning rounded p-4 mt-3 bg-dark-subtle">
+        <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
+        <Form.Label className="me-2 text-nowrap w-75">Product Name</Form.Label>
         <Form.Control
             type="text"
             placeholder="Product Name"
@@ -97,8 +97,8 @@ return (
             }}
         />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicDescription">
-        <Form.Label>Product Description</Form.Label>
+        <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicDescription">
+        <Form.Label className="me-2 text-nowrap w-75">Product Description</Form.Label>
         <Form.Control
             type="text"
             placeholder="Describe The Product"
@@ -108,11 +108,8 @@ return (
             }}
         />
         </Form.Group>
-        <>
-        <img src={state.image} alt="" />
-        </>
-        <Form.Group className="mb-3" controlId="formBasicImage">
-        <Form.Label>Image URL</Form.Label>
+        <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicImage">
+        <Form.Label className="me-2 text-nowrap w-75">Image URL</Form.Label>
         <Form.Control
             type="text"
             placeholder="Put Image Url"
@@ -122,8 +119,8 @@ return (
             }}
         />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPrice">
-        <Form.Label>Price</Form.Label>
+        <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicPrice">
+        <Form.Label className="me-2 text-nowrap w-75">Price</Form.Label>
         <Form.Control
             type="number"
             placeholder="Product Price"
@@ -133,8 +130,8 @@ return (
             }}
         />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCategory">
-        <Form.Label>Select Category</Form.Label>
+        <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicCategory">
+        <Form.Label className="me-2 text-nowrap w-75">Select Category</Form.Label>
         <Form.Control
             as="select"
             value={state.category}
@@ -150,16 +147,18 @@ return (
             ))}
         </Form.Control>
         </Form.Group>
-        <Button
-        onClick={(e) => {
-            callEditProduct();
-            e.preventDefault();
-        }}
-        variant="primary"
-        type="submit"
-        >
-        Submit
-        </Button>
+        <div className="d-flex justify-content-center">
+            <Button
+            onClick={(e) => {
+                callEditProduct();
+                e.preventDefault();
+            }}
+            variant="warning"
+            type="submit"
+            >
+            Submit
+            </Button>
+        </div>
     </Form>
     </>
 );

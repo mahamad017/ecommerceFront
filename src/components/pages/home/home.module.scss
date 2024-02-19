@@ -6,9 +6,13 @@
             cursor: pointer;
         }
         .item.active {
-            background-color: black;
-            color: white;
+            background-color: #ffc107;
         }
+    }
+    .addButtons:hover {
+        border: 2px solid #242424;
+        background-color: transparent;
+        color: #242424;
     }
     .products {
         display: flex;
@@ -17,8 +21,17 @@
         justify-content: center;
         flex-wrap: wrap;
         .product {
-            width: 18rem;
+            background-color: #242424;
+            color: #dedede;
+            width: 21rem;
             margin: 3px;
+            .productButton{
+                button, a {
+                width: fit-content;
+                text-wrap: nowrap;
+                margin: 0 2px;
+                }
+            }
             .image {
                 height: 200px;
                 object-fit: cover;

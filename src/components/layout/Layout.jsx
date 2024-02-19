@@ -55,7 +55,7 @@ export default function Layout() {
                 logout,
             }}
         >
-            <div className={styles.layout}>
+            <div className={styles.layout + " " + "bg-secondary-subtle"}>
                 <AppBar />
                 <div className={styles.page}>
                     <Outlet />

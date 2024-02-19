@@ -70,7 +70,7 @@ function AppBar() {
     };
 
     return (
-        <Navbar expand="lg" className={styles.appbar + " " + "bg-body-tertiary"}>
+        <Navbar bg="dark" data-bs-theme="dark" expand="lg" className={styles.appbar}>
             <Container fluid>
                 {/* <Navbar.Brand href="/">My Store</Navbar.Brand> */}
                 <Link to="/" className="navbar-brand">
@@ -94,7 +94,7 @@ function AppBar() {
                                     </>
                                 ) : (
                                     <>
-                                    {(request != "admin") ?(
+                                    {/* {(request != "admin") ?( */}
                                         <>
                                         <Link onClick={onLogout} className="nav-link mt-1">
                                             Logout
@@ -106,7 +106,7 @@ function AppBar() {
                                             My Orders <Badge bg="secondary m-2">0{statistics["order"]}</Badge>
                                         </Link>
                                     </> 
-                                    ):(
+                                    {/* ):( */}
                                     <>
                                         <Link to="categories" className="nav-link">
                                             CategoriesAction <Badge bg="secondary m-2">{statistics["category"]}</Badge>
@@ -115,7 +115,7 @@ function AppBar() {
                                             Users <Badge bg="secondary m-2">{statistics["user"]}</Badge>
                                         </Link>
                                     </>
-                                )}
+                                {/* )} */}
                                 </>
                                 )}
                             </>
@@ -134,13 +134,14 @@ function AppBar() {
                         <Button
                             onClick={(e) => {
                                 appContext.setSearch(search);
-                            }}
-                            variant="outline-success"
+                            } }
+                            className="me-5"
+                            variant="outline-warning"
                         >
                             Search
                         </Button>
                         <Link to="Cart">
-                            <Button variant="outline-primary">Cart</Button>
+                            <Button variant="outline-light">Cart</Button>
                         </Link>
                     </Form>
                 </Navbar.Collapse>

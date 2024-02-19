@@ -52,9 +52,9 @@ const CtategoriesAction = () => {
 
     return (
         <div>
-            <div class="main-table-containter ">
-                <div class="title-table-container">
-                    <div class="subtitle">categories</div>
+            <div className="main-table-containter ">
+                <div className="title-table-container">
+                    <div className="subtitle">categories</div>
                 </div>
                 <div>
                     <table>

@@ -1,5 +1,4 @@
 body {
-    background-color: #e3e8e6;
     place-items: center;
     height: 100dvh;
     margin: 0;
@@ -74,7 +73,7 @@ body {
     
   }
 th{
-   padding: 30px;
+  padding: 30px;
 }
   tr  {
     transition: background-color 0.2s;

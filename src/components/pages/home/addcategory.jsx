@@ -41,9 +41,9 @@ export default function AddProduct() {
 
     return (
         <>
-            <Form>
-                <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Product Name</Form.Label>
+            <Form className="border border-3 border-warning rounded p-4 mt-3 bg-dark-subtle">
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
+                    <Form.Label className="me-2 text-nowrap w-75">Product Name</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Product Name"
@@ -52,8 +52,8 @@ export default function AddProduct() {
                         }}
                     />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Product Name</Form.Label>
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
+                    <Form.Label className="me-2 text-nowrap w-75">Product Name</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Product Name"
@@ -62,8 +62,8 @@ export default function AddProduct() {
                         }}
                     />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicDescription">
-                    <Form.Label>Product Description</Form.Label>
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicDescription">
+                    <Form.Label className="me-2 text-nowrap w-75">Product Description</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Describe The Product"
@@ -72,17 +72,14 @@ export default function AddProduct() {
                         }}
                     />
                 </Form.Group>
-
-                <Button
-                    onClick={(e) => {
-                        callAddProduct();
-                        e.preventDefault();
-                    }}
-                    variant="primary"
-                    type="submit"
-                >
-                    Submit
-                </Button>
+                <div className="d-flex justify-content-center">
+                    <Button onClick={(e) => {
+                            callAddProduct()
+                            e.preventDefault()
+                        }} variant="warning" type="submit">
+                        Submit
+                    </Button>
+                </div>
             </Form>
         </>
     );

@@ -77,12 +77,12 @@ useEffect(() => {
                         ))}
                     </div>
                 ) }
-            <div>
+            <div className="d-flex justify-content-evenly mt-3">
                 <Link to="addProduct" className="mx-auto">
-                    <Button varient="outline-primary">addProduct +</Button>
+                    <Button className={styles.addButtons} variant="dark" size="lg">addProduct +</Button>
                 </Link>
-                <Link to="adduser" className="mx-auto">
-                    <Button varient="outline-primary">addcategory +</Button>
+                <Link to="addcategory" className="mx-auto">
+                    <Button className={styles.addButtons} variant="dark" size="lg">addcategory +</Button>
                 </Link>
             </div>
         </div>
