@@ -138,9 +138,6 @@ function AppBar() {
                         >
                             Search
                         </Button>
-                        <Link to="Cart">
-                            <Button variant="outline-light">Cart</Button>
-                        </Link>
                     </Form>
                 </Navbar.Collapse>
             </Container>

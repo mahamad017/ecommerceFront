@@ -8,7 +8,7 @@ import { AuthContext } from "../../MyApp";
 import Api from "../../../tools/api";
 import { AppContext } from "../../layout/Layout";
 import { useCookies } from "react-cookie";
-import { Eye, Trash } from "react-bootstrap-icons";
+import { Cursor, Eye, Trash } from "react-bootstrap-icons";
 import { Add, Edit } from "@mui/icons-material";
 
 function Product() {
@@ -17,11 +17,11 @@ function Product() {
     const appContext = useContext(AppContext);
     const [cookies] = useCookies(["token"]);
     const token = cookies.token;
-    const [cart, setCart] = useState([{}]);
+    const [cart, setCart] = useState([]);
     const [totalCartBalance, setTotalCartBalance] = useState(0);
     const [products, setProducts] = useState([]);
-    const [showProduct, setShowProducts] = useState({name:'', description: '', price: 0});
-    
+    const [showProduct, setShowProducts] = useState({ name: "", description: "", price: 0 });
+
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
     const handleSetCart = (id, name, qty, price) => {
@@ -77,9 +77,30 @@ function Product() {
             setProducts(productsRes);
         }
     };
+    const callorder = async () => {
+        try {
+            const response = await Api.fetch({
+                url: "addorders",
+                method: "POST",
+                Body:cart,
+                token: token,
+                showPopup: appContext.showPopup,
+            });
+            console.log(response)
+    if (response != null) {
+    appContext.showPopup(response.message);
+    }
+} catch (error) {
+    console.error(error);
+    appContext.showPopup("An error occurred. Please try again later.");
+    }
+   
+};
+    
 
     useEffect(() => {
         getProducts();
+     
     }, []);
 
     return (
@@ -100,10 +121,12 @@ function Product() {
                                         variant="primary"
                                         onClick={() => {
                                             handleShowModal();
-                                           setShowProducts(product);
+                                            setShowProducts(product);
                                         }}
                                     >
-                                        <Eye size={15} />
+                                        <div className={styles.icons} variant="primary">
+                                            <Eye size={15} />
+                                        </div>
                                     </div>
                                     {authState && (
                                         <>
@@ -126,53 +149,60 @@ function Product() {
                     ))}
                 </div>
             )}
-                                        {/* cart div */}
-            <div className={styles.product}></div>
-            <div className={styles.cartContainer}>
+
+            {/* <div className={styles.product}></div> */}
+
+            {cart.length === 0 ? (
+                " "
+            ) : (
                 <>
-                    {!cart ? (
-                        ""
-                    ) : (
-                        <>
-                            {cart.map((item) => (
-                                <div className={styles.dataContainer} key={item.id}>
-                                    <div className={styles.name}>{item.name}</div>
-                                    <div className={styles.qty}>{item.qty}</div>
-                                    <div className={styles.qty}>{item.price}</div>
-
-                                    <div
-                                        onClick={() => {
-                                            handelRemoveCartProdact(item.id, item.price);
-                                        }}
-                                    >
-                                        <Trash color="red" size={15} />
-                                    </div>
+                    <div className={styles.cartContainer}>
+                        {cart.map((item) => (
+                            <div className={styles.dataContainer} key={item.id}>
+                                <div className={styles.name}>{item.name}</div>
+                                <div className={styles.qty}>{item.qty}</div>
+                                <div className={styles.qty}>{item.price}</div>
+                                <div
+                                    onClick={() => {
+                                        handelRemoveCartProdact(item.id, item.price);
+                                    }}
+                                >
+                                    {/* Render trash icon */}
+                                    <Trash color="red" size={15} />
                                 </div>
-                            ))}
-                        </>
-                    )}
-                </>
-                <div className={styles.totalPrice}>Total Price: {totalCartBalance} </div>
-            </div>
-
-                {/* model div */}
-                <Modal show={showModal} onHide={handleCloseModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>{showProduct.name}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <img src={showProduct.image} alt={showProduct.name} className="img-fluid mb-2" />
-                        <p>{showProduct.description}</p>
-                        <p style={{ fontWeight: "bold" }}>Price: {showProduct.price}$</p>
-                        <p>{showProduct.description}</p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleCloseModal}>
-                            Close
+                            </div>
+                         
+                        ))}
+                        <div className={styles.totalPrice}>Total Price: {totalCartBalance} </div>
+                        <Button
+                            variant="primary"
+                            onClick={() => {
+                                callorder();
+                            }}
+                        >
+                            submit
                         </Button>
-                    </Modal.Footer>
-                </Modal>
-            
+                    </div>
+                </>
+            )}
+
+            {/* model div */}
+            <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{showProduct.name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <img src={showProduct.image} alt={showProduct.name} className="img-fluid mb-2" />
+                    <p>{showProduct.description}</p>
+                    <p style={{ fontWeight: "bold" }}>Price: {showProduct.price}$</p>
+                    <p>{showProduct.description}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 }
