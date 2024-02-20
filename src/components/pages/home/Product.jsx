@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
@@ -7,99 +7,126 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../MyApp";
 import Api from "../../../tools/api";
 import { AppContext } from "../../layout/Layout";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 import { Eye, Trash } from "react-bootstrap-icons";
 import { Add, Edit } from "@mui/icons-material";
 
-
-function Product({ product }) {
+function Product() {
     const { authState } = useContext(AuthContext);
     const [showModal, setShowModal] = useState(false);
     const appContext = useContext(AppContext);
-    const [cookies] = useCookies(['token']);
+    const [cookies] = useCookies(["token"]);
     const token = cookies.token;
+    const [cart, setCart] = useState([{}]);
+    const [totalCartBalance, setTotalCartBalance] = useState(0);
+    const [products, setProducts] = useState([]);
+    const [showProduct, setShowProducts] = useState({name:'', description: '', price: 0});
+    
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
-    const [cart,setCart] = useState([{}])
-    const [totalCartBalance, setTotalCartBalance] = useState(0);
-    
-    const handleSetCart = (id, name, qty,price) => {
-              const newCartContent = [...cart, { id, name, qty,price }];
-              setCart(newCartContent);
-              setTotalCartBalance(totalCartBalance + price);
-    }
-    const handelRemoveCartProdact = (id ,price) => {
-
-       let temp;
-       const indexToRemove = cart.findIndex((item) => item.id === id);
-       (indexToRemove !== -1) ? temp = [...cart.slice(0, indexToRemove), ...cart.slice(indexToRemove + 1)] :temp = cart; 
-        setCart(temp)
+    const handleSetCart = (id, name, qty, price) => {
+        const newCartContent = [...cart, { id, name, qty, price }];
+        setCart(newCartContent);
+        setTotalCartBalance(totalCartBalance + price);
+    };
+    const handelRemoveCartProdact = (id, price) => {
+        let temp;
+        const indexToRemove = cart.findIndex((item) => item.id === id);
+        indexToRemove !== -1 ? (temp = [...cart.slice(0, indexToRemove), ...cart.slice(indexToRemove + 1)]) : (temp = cart);
+        setCart(temp);
         setTotalCartBalance(totalCartBalance - price);
-
-    }
+    };
     const deleteProduct = async (id) => {
         try {
             const response = await Api.fetch({
-            url: `deleteProduct/${id}`,
-            method: "DELETE",
-            token: token,
-            showPopup: appContext.showPopup,
+                url: `deleteProduct/${id}`,
+                method: "DELETE",
+                token: token,
+                showPopup: appContext.showPopup,
             });
-            console.log(response)
+            console.log(response);
             if (response != null) {
-            appContext.showPopup(response.message);
+                appContext.showPopup(response.message);
             }
         } catch (error) {
             console.error(error);
             appContext.showPopup("An error occurred. Please try again later.");
-            }
-        window.location.href = '/'
+        }
     };
-    
+
+    const getProducts = async () => {
+        let params;
+        if (appContext.appState.search != null) {
+            params = { name: appContext.appState.search };
+        }
+        if (appContext.appState.category != null) {
+            params = { ...params, category: appContext.appState.category };
+        }
+        const response = await Api.fetch({
+            url: "products",
+            params: params,
+        });
+
+        if (response != null) {
+            const productsRes = [];
+            if (response.data != null) {
+                for (const keyIndex in response.data) {
+                    productsRes.push(response.data[keyIndex]);
+                }
+            }
+            setProducts(productsRes);
+        }
+    };
+
+    useEffect(() => {
+        getProducts();
+    }, []);
+
     return (
+        // card div
         <>
-            <Card className={styles.product}>
-                <Card.Img className={styles.image} variant="top" src={product.image} />
-                <Card.Body>
-                    <Card.Title className="mb-5">{product.name}</Card.Title>
-                    <div className="d-flex justify-content-between">
-                        <div className={styles.icons} variant="primary" onClick={handleShowModal}>
-                            <Eye size={15} />
-                        </div>
-                        {authState && (
-                            <>
-                                <Link to={`editProduct/${product.id}`}>
-                                    <div className={styles.icons} variant="primary">
-                                        <Edit size={15} />
+            {products == null || products.length == 0 ? (
+                <h1>No Product has been found!</h1>
+            ) : (
+                <div className={styles.products}>
+                    {products.map((product) => (
+                        <Card className={styles.product}>
+                            <Card.Img className={styles.image} variant="top" src={product.image} />
+                            <Card.Body>
+                                <Card.Title className="mb-5">{product.name}</Card.Title>
+                                <div className="d-flex justify-content-between">
+                                    <div
+                                        className={styles.icons}
+                                        variant="primary"
+                                        onClick={() => {
+                                            handleShowModal();
+                                           setShowProducts(product);
+                                        }}
+                                    >
+                                        <Eye size={15} />
                                     </div>
-                                </Link>
-                                <div className={styles.icons} variant="danger" onClick={() => deleteProduct(product.id)}>
-                                    <Trash color="red" size={15} />
+                                    {authState && (
+                                        <>
+                                            <Link to={`editProduct/${product.id}`}>
+                                                <div className={styles.icons} variant="primary">
+                                                    <Edit size={15} />
+                                                </div>
+                                            </Link>
+                                            <div className={styles.icons} variant="danger" onClick={() => deleteProduct(product.id)}>
+                                                <Trash color="red" size={15} />
+                                            </div>
+                                            <div className={styles.icons} variant="primary" onClick={() => handleSetCart(product.id, product.name, 1, product.price)}>
+                                                <Add size={15} />
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
-                                <div className={styles.icons} variant="primary" onClick={() => handleSetCart(product.id, product.name, 1, product.price)}>
-                                    <Add size={15} />
-                                </div>
-                            </>
-                        )}
-                    </div>
-                </Card.Body>
-            </Card>
-            <Modal show={showModal} onHide={handleCloseModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{product.name}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <img src={product.image} alt={product.name} className="img-fluid mb-2" />
-                    <p>{product.description}</p>
-                    <p style={{ fontWeight: "bold" }}>Price: {product.price}$</p>
-                    <p>{product.description}</p>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
-                        Close
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                            </Card.Body>
+                        </Card>
+                    ))}
+                </div>
+            )}
+                                        {/* cart div */}
             <div className={styles.product}></div>
             <div className={styles.cartContainer}>
                 <>
@@ -115,7 +142,7 @@ function Product({ product }) {
 
                                     <div
                                         onClick={() => {
-                                            handelRemoveCartProdact(product.id, product.price);
+                                            handelRemoveCartProdact(item.id, item.price);
                                         }}
                                     >
                                         <Trash color="red" size={15} />
@@ -127,6 +154,25 @@ function Product({ product }) {
                 </>
                 <div className={styles.totalPrice}>Total Price: {totalCartBalance} </div>
             </div>
+
+                {/* model div */}
+                <Modal show={showModal} onHide={handleCloseModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{showProduct.name}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <img src={showProduct.image} alt={showProduct.name} className="img-fluid mb-2" />
+                        <p>{showProduct.description}</p>
+                        <p style={{ fontWeight: "bold" }}>Price: {showProduct.price}$</p>
+                        <p>{showProduct.description}</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseModal}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            
         </>
     );
 }
