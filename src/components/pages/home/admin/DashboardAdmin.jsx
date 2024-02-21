@@ -11,41 +11,45 @@ const DashboardAdmin = () => {
     const [cookie, setCookie] = useCookies("token");
     const appContext = useContext(AppContext);
     let token;
-     const onLogout = async () => {
-         setCookie("token", null);
+    const onLogout = async () => {
+        setCookie("token", null);
 
-         token = appContext.appState.token != null ? appContext.appState.token : cookie?.token;
-         if (token == null) return;
+        token = appContext.appState.token != null ? appContext.appState.token : cookie?.token;
+        if (token == null) return;
 
-         await Api.fetch({ method: "PUT", url: "logout", token });
+        await Api.fetch({ method: "PUT", url: "logout", token });
 
-         appContext.logout();
+        appContext.logout();
 
-         window.location.href = "/login";
-     };
-  return (
-      <div>
-          <Link to="dashboard" className="nav-link">
-              dashboardUser
-          </Link>
-          <Link to="showproducts" className="nav-link">
-              products
-          </Link>
-          <Link to="addProduct" className="nav-link">
-              addProduct +
-          </Link>
-          <Link to="categories" className="nav-link">
-              CategoriesAction
-          </Link>
-          <Link to="addcategory" className="mx-auto">
-              <Button className={styles.addButtons} variant="outline-info" size="lg">
-                  addcategory +
-              </Button>
-          </Link>
-          <Link onClick={onLogout} className="nav-link mt-1">
-              Logout
-          </Link>
-      </div>
+        window.location.href = "/login";
+    };
+return (
+    <div>
+        <div className='d-flex justify-content-between bg-info my-3'>
+            <Link to="dashboard" className="btn btn-info border border-dark">
+                dashboardUser
+            </Link>
+            <Link to="showproducts" className="btn btn-info border border-dark">
+                products
+            </Link>
+            
+            <Link to="categories" className="btn btn-info border border-dark">
+                CategoriesAction
+            </Link>
+        </div>
+        <div className='d-flex justify-content-between w-100'>
+            <Link to="addProduct">
+                <Button className={styles.addButtons} variant="outline-info" size="lg">
+                addProduct +
+                </Button>
+            </Link>
+            <Link to="addcategory">
+                <Button className={styles.addButtons} variant="outline-info" size="lg">
+                    addcategory +
+                </Button>
+            </Link>
+        </div>
+    </div>
   );
 }
 

@@ -43,30 +43,30 @@ export default function AddProduct() {
         <>
             <Form className="border border-3 border-info rounded p-4 mt-3 bg-warning-subtle">
                 {/* <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
-                    <Form.Label className="me-2 text-nowrap w-75">Product Name</Form.Label>
+                    <Form.Label className="me-2 text-nowrap w-75">Category Name</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Product Name"
+                        placeholder="Category Name"
                         onChange={(e) => {
                             setState({ ...state, id: e.target.value });
                         }}
                     />
                 </Form.Group> */}
                 <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
-                    <Form.Label className="me-2 text-nowrap w-75">Product Name</Form.Label>
+                    <Form.Label className="me-2 text-nowrap w-75">Category Name</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Product Name"
+                        placeholder="Category Name"
                         onChange={(e) => {
                             setState({ ...state, name: e.target.value });
                         }}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicDescription">
-                    <Form.Label className="me-2 text-nowrap w-75">Product Description</Form.Label>
+                    <Form.Label className="me-2 text-nowrap w-75">Category Description</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Describe The Product"
+                        placeholder="Describe The Category"
                         onChange={(e) => {
                             setState({ ...state, description: e.target.value });
                         }}

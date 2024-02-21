@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
-import styles from "./home.module.scss";
+import styles from "../../../../src/components/pages/home/home.module.scss";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../MyApp";
 import Api from "../../../tools/api";
@@ -110,10 +110,10 @@ function Product() {
             {products == null || products.length == 0 ? (
                 <h1>No Product has been found!</h1>
             ) : (
-                <div className={styles.products}>
+                <div className={styles.products+ " " + "d-flex justify-content-between flex-wrap"}>
                     {products.map((product) => (
-                        <Card className={styles.product}>
-                            <Card.Img className={styles.image} variant="top" src={product.image} />
+                        <Card className={ styles.product } style={ { width: '20rem', margin: '5px', }}>
+                            <Card.Img className={styles.image} style={{ height: '200px',}} variant="top" src={product.image} />
                             <Card.Body>
                                 <Card.Title className="mb-5">{product.name}</Card.Title>
                                 <div className="d-flex justify-content-between">
@@ -126,21 +126,21 @@ function Product() {
                                         }}
                                     >
                                         <div className={styles.icons} variant="primary">
-                                            <Eye size={15} />
+                                            <Eye style = {{ cursor: 'pointer', }} size={15} />
                                         </div>
                                     </div>
                                     {authState && (
                                         <>
                                             <Link to={`editProduct/${product.id}`}>
                                                 <div className={styles.icons} variant="primary">
-                                                    <Edit size={15} />
+                                                    <Edit style = {{ cursor: 'pointer', }} size={15} />
                                                 </div>
                                             </Link>
                                             <div className={styles.icons} variant="danger" onClick={() => deleteProduct(product.id)}>
-                                                <Trash color="red" size={15} />
+                                                <Trash color="red" style = {{ cursor: 'pointer', }} size={15} />
                                             </div>
                                             <div className={styles.icons} variant="primary" onClick={() => handleSetCart(product.id, product.name, 1, product.price)}>
-                                                <Add size={15} />
+                                                <Add style = {{ cursor: 'pointer', }} size={15} />
                                             </div>
                                         </>
                                     )}
@@ -169,7 +169,7 @@ function Product() {
                                     }}
                                 >
                                     {/* Render trash icon */}
-                                    <Trash color="red" size={15} />
+                                    <Trash color="red" style = {{ cursor: 'pointer', }} size={15} />
                                 </div>
                             </div>
                          
