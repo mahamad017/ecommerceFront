@@ -13,6 +13,8 @@ import { Add, Edit } from "@mui/icons-material";
 
 function Product() {
     const { authState } = useContext(AuthContext);
+    const [categories, setCategories] = useState([]);
+
     const [showModal, setShowModal] = useState(false);
     const appContext = useContext(AppContext);
     const [cookies] = useCookies(["token"]);
@@ -21,6 +23,13 @@ function Product() {
     const [totalCartBalance, setTotalCartBalance] = useState(0);
     const [products, setProducts] = useState([]);
     const [showProduct, setShowProducts] = useState({ name: "", description: "", price: 0 });
+      const getCategories = async () => {
+          // call API
+          const response = await Api.fetch({ url: "categories" });
+
+          // check response
+          if (response != null) setCategories(response.data); // update state with recevied categories
+      };
 
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
@@ -99,10 +108,11 @@ function Product() {
 };
     
 
-    useEffect(() => {
-        getProducts();
-     
-    }, []);
+   useEffect(() => {
+       // component did mount => get & update categories from back-end
+       if (categories.length == 0) getCategories();
+       getProducts();
+   }, [appContext.appState.search, appContext.appState.category]);
 
     return (
         // card div
