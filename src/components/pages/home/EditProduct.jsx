@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import { useCookies } from 'react-cookie';
 
 
+
 export default function EditProduct() {
 const [state, setState] = useState({
     name: "",
@@ -70,7 +71,10 @@ useEffect(() => {
 useEffect(() => {
     const getProduct = async () => {
     try {
-        const response = await Api.fetch({ url: `showProduct/${productId}` });
+        const response = await Api.fetch({
+            url: `showProduct/${productId}`,
+            token: token,
+        });
         if (response != null && Array.isArray(response.data)) {
         setState(response.data[0]);
         }
@@ -83,7 +87,7 @@ useEffect(() => {
 
 return (
     <>
-    <Form className="border border-3 border-warning rounded p-4 mt-3 bg-dark-subtle">
+    <Form className="border border-3 border-info rounded p-4 mt-3 bg-warning-subtle">
         <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
         <Form.Label className="me-2 text-nowrap w-75">Product Name</Form.Label>
         <Form.Control
@@ -151,7 +155,7 @@ return (
                 callEditProduct();
                 e.preventDefault();
             }}
-            variant="warning"
+            variant="info"
             type="submit"
             >
             Submit

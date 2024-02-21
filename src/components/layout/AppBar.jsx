@@ -68,7 +68,7 @@ function AppBar() {
     };
 
     return (
-        <Navbar bg="dark" data-bs-theme="dark" expand="lg" className={styles.appbar}>
+        <Navbar bg="info" data-bs-theme="light" expand="lg" className={styles.appbar + " " + "fw-bold"}>
             <Container fluid>
                 {/* <Navbar.Brand href="/">My Store</Navbar.Brand> */}
                 <Link to="/" className="navbar-brand">
@@ -76,7 +76,7 @@ function AppBar() {
                 </Link>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
-                    <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
+                    <Nav className="me-auto my-2 my-lg-0 d-flex align-items-baseline" style={{ maxHeight: "100px" }} navbarScroll>
                         {loading ? (
                             <Loading />
                         ) : (
@@ -134,7 +134,7 @@ function AppBar() {
                                 appContext.setSearch(search);
                             } }
                             className="me-5"
-                            variant="outline-warning"
+                            variant="outline-light"
                         >
                             Search
                         </Button>

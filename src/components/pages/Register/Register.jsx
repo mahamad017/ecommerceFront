@@ -1,11 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import './register.scss'
 import { useContext, useState } from 'react';
 import Api from '../../../tools/api';
 import { AppContext } from '../../layout/Layout';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+
 
 export default function RegisterPage() {
     const navigate = useNavigate();
@@ -58,11 +58,13 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className='register-page'>
-            <h1> Register Page</h1>
+        <div className="border border-3 border-info rounded p-4 mt-3 bg-warning-subtle">
+            <div className='d-flex justify-content-center'>
+                <h1>Register Page</h1>
+            </div>
             <Form>
-                <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Name</Form.Label>
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
+                    <Form.Label className="me-2 text-nowrap w-75">Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Name"
                         onChange={(e) => {
                             setState({ ...state, name: e.target.value })
@@ -70,20 +72,17 @@ export default function RegisterPage() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicEmail">
+                    <Form.Label className="me-2 text-nowrap w-75">Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email"
                         onChange={(e) => {
                             setState({ ...state, email: e.target.value })
                         }}
                     />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicPassword">
+                    <Form.Label className="me-2 text-nowrap w-75">Password</Form.Label>
                     <Form.Control type="password" placeholder="Password"
                         onChange={(e) => {
                             setState({ ...state, password: e.target.value })
@@ -91,8 +90,8 @@ export default function RegisterPage() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPasswordConfirmation">
-                    <Form.Label>Password Confirmation</Form.Label>
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicPasswordConfirmation">
+                    <Form.Label className="me-2 text-nowrap w-75">Password Confirmation</Form.Label>
                     <Form.Control type="password" placeholder="Password Confirmation"
                         onChange={(e) => {
                             setState({ ...state, password_confirmation: e.target.value })
@@ -100,15 +99,17 @@ export default function RegisterPage() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Agree to privacy policy" />
                 </Form.Group>
-                <Button onClick={(e) => {
-                    callRegister()
-                    e.preventDefault()
-                }} variant="primary" type="submit">
-                    Submit
-                </Button>
+                <div className="d-flex justify-content-center">
+                    <Button onClick={(e) => {
+                        callRegister()
+                        e.preventDefault()
+                    }} variant="primary" type="submit">
+                        Submit
+                    </Button>
+                </div>
             </Form>
         </div>
     );

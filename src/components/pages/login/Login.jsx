@@ -1,11 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import './login.scss'
 import { useContext, useState } from 'react';
 import Api from '../../../tools/api';
 import { AppContext } from '../../layout/Layout';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -54,12 +54,13 @@ export default function LoginPage() {
     }
 
     return (
-        <div className='login-page'>
-            <h1> Login Page</h1>
+        <div className="border border-3 border-info rounded p-4 mt-3 bg-warning-subtle">
+            <div className='d-flex justify-content-center'>
+                <h1>Login Page</h1>
+            </div>
             <Form>
-
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicEmail">
+                    <Form.Label className="me-2 text-nowrap w-75">Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email"
                         onChange={(e) => {
                             setState({ ...state, email: e.target.value })
@@ -67,21 +68,22 @@ export default function LoginPage() {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicPassword">
+                    <Form.Label className="me-2 text-nowrap w-75">Password</Form.Label>
                     <Form.Control type="password" placeholder="Password"
                         onChange={(e) => {
                             setState({ ...state, password: e.target.value })
                         }}
                     />
                 </Form.Group>
-
-                <Button onClick={(e) => {
-                    e.preventDefault()
-                    callLogin()
-                }} variant="primary" type="submit">
-                    Login
-                </Button>
+                <div className="d-flex justify-content-center">
+                    <Button onClick={(e) => {
+                        e.preventDefault()
+                        callLogin()
+                    }} variant="info" type="submit">
+                        Login
+                    </Button>
+                </div>
             </Form>
         </div>
     );

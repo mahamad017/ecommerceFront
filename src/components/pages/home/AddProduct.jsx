@@ -60,7 +60,7 @@ getCategories();
 
 return (
 <>
-    <Form className="border border-3 border-warning rounded p-4 mt-3 bg-dark-subtle">
+    <Form className="border border-3 border-info rounded p-4 mt-3 bg-warning-subtle">
     <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
         <Form.Label className="me-2 text-nowrap w-75">Product Name</Form.Label>
         <Form.Control
@@ -121,7 +121,7 @@ return (
             <Button onClick={(e) => {
                     callAddProduct()
                     e.preventDefault()
-                }} variant="warning" type="submit">
+                }} variant="info" type="submit">
                 Submit
             </Button>
         </div>
