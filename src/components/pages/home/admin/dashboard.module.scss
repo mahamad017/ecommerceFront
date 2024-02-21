@@ -13,7 +13,6 @@
     .addButtons {
         filter: drop-shadow(0 0 1px  #0dcaf0);
         transition: all 0.2s linear;
-        width: fit-content;
     }
     // .addButtons:hover {
     //     background-color: transparent;
@@ -53,34 +52,22 @@
 }
 
 
+
 .cartContainer{
-    background-color: #ffffff8c;
-    border: #0000003f 1px solid;
-    position: absolute;
-    width: fit-content;
-    height: fit-content;
-    inset-inline-end: 10px;
-    inset-block-start: 75%;
-    padding: 10px;
+border: #0000003f 1px solid;
+position: absolute;
+inset-inline-end: 10px;
+inset-block-start: 40%;
+padding: 10px;
+display: flex;
+flex-direction: column;
+gap: 0.5em;
+.dataContainer{
+border: #0000003f 1px solid;
     display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    .dataContainer{
-        border: #0dcaf0 1px solid;
-        border-right: none;
-        border-radius: 5px;
-        display: flex;
-        gap: 1em;
-        padding-inline: 0.5em;
-        .price {
-            font-weight: bold;
-        }
-    }
-    .totalPrice {
-        color: #0D6CF9;
-        font-weight: bolder;
-        text-align: center;
-    }
+    gap: 1em;
+    padding-inline: 0.5em;
+}
 }
 .icons{
     border: #0000003f 1px solid;
@@ -90,19 +77,4 @@
     width: 32px;
     height: 32px;
 }
-.layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    height: 100dvh;
-    .appbar {
-        width: 100%;
-    }
-    .page {
-        flex: 1 0 0;
-    }
-    .footer {
-        text-align: center;
-    }
-}
+

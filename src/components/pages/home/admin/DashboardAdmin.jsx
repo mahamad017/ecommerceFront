@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Badge, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import styles from '../home.module.scss'
+import styles from './dashboard.module.scss'
 import { useCookies } from 'react-cookie';
 import { AppContext } from '../../../layout/Layout';
 import Api from '../../../../tools/api';
@@ -25,32 +25,30 @@ const DashboardAdmin = () => {
     };
 return (
     <div>
-        <div className='d-flex justify-content-between bg-info my-3'>
-            <Link to="dashboard" className="btn btn-info border border-dark">
+        <div className='position-fixed top-10 start-0 d-flex flex-column justify-content-between bg-info my-3 rounded' style={{height: '300px'}}>
+            <Link to="dashboard" className="btn btn-info border text-light">
                 dashboardUser
             </Link>
-            <Link to="showproducts" className="btn btn-info border border-dark">
+            <Link to="showproducts" className="btn btn-info border text-light">
                 products
             </Link>
             
-            <Link to="categories" className="btn btn-info border border-dark">
+            <Link to="categories" className="btn btn-info border text-light">
                 CategoriesAction
             </Link>
-        </div>
-        <div className='d-flex justify-content-between w-100'>
-            <Link to="addProduct">
-                <Button className={styles.addButtons} variant="outline-info" size="lg">
-                addProduct +
-                </Button>
-            </Link>
-            <Link to="addcategory">
-                <Button className={styles.addButtons} variant="outline-info" size="lg">
-                    addcategory +
-                </Button>
-            </Link>
+                <Link to="addProduct">
+                    <Button className={styles.addButtons} variant="outline-light" size="lg">
+                        add  product    +
+                    </Button>
+                </Link>
+                <Link to="addcategory">
+                    <Button className={styles.addButtons} variant="outline-light" size="lg">
+                        add category +
+                    </Button>
+                </Link>
         </div>
     </div>
-  );
+    );
 }
 
 export default DashboardAdmin
