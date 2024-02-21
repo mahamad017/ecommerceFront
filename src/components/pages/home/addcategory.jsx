@@ -37,7 +37,7 @@ export default function AddProduct() {
             console.error(error);
             appContext.showPopup("An error occurred. Please try again later.");
         }
-        window.location.href = "/DashboardAdmin/categories";
+        window.location.href = "/";
     };
 
 
@@ -55,7 +55,7 @@ export default function AddProduct() {
                     />
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicDescription">
-                    <Form.Label className="me-2 text-nowrap w-75">Product Description</Form.Label>
+                    <Form.Label className="me-2 text-nowrap w-75">category Description</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Describe The category"

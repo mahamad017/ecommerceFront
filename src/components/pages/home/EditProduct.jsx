@@ -50,7 +50,7 @@ const callEditProduct = async () => {
         console.error(error);
         appContext.showPopup("An error occurred. Please try again later.");
         }
-        window.location.href = '/'
+        window.location.href = "/";
     };
 
 useEffect(() => {

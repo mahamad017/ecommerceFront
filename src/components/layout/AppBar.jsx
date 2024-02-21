@@ -107,12 +107,8 @@ function AppBar() {
                                                 </Link>
                                             </>
                                         )}
-<<<<<<< HEAD
-                                                <Link onClick={onLogout} className="nav-link mt-1 ">
-                                                    Logout
-                                                </Link>
-=======
->>>>>>> edf98466e6bd6cf0b32ed0a498b3e154b206f08c
+
+
                                                 <Link to="user" className="nav-link mt-1">
                                                     My Details
                                                 </Link>
@@ -136,15 +132,15 @@ function AppBar() {
                             onClick={(e) => {
                                 appContext.setSearch(search);
                             }}
-                            className="mx-1"
+                            className="me-5"
                             variant="outline-light"
                         >
                             Search
                         </Button>
+                                                <Link onClick={onLogout} className="nav-link mt-1 ">
+                                                    Logout
+                                                </Link>
                     </Form>
-                    <Link onClick={onLogout} className="nav-link mt-1 border border-black rounded p-1">
-                        Logout
-                    </Link>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

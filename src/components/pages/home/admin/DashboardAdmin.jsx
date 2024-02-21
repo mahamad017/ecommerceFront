@@ -25,30 +25,26 @@ const DashboardAdmin = () => {
     };
 return (
     <div>
-        <div className='position-fixed top-10 start-0 d-flex flex-column justify-content-between bg-info my-3 rounded' style={{height: '300px'}}>
+        <div className="position-fixed top-10 start-0 d-flex flex-column justify-content-between  my-3 rounded" style={{ height: "300px" }}>
             <Link to="dashboard" className="btn btn-info border text-light">
                 dashboardUser
             </Link>
             <Link to="showproducts" className="btn btn-info border text-light">
                 products
             </Link>
-            
+
             <Link to="categories" className="btn btn-info border text-light">
-                CategoriesAction
+                Categories
             </Link>
-                <Link to="addProduct">
-                    <Button className={styles.addButtons} variant="outline-light" size="lg">
-                        add  product    +
-                    </Button>
-                </Link>
-                <Link to="addcategory">
-                    <Button className={styles.addButtons} variant="outline-light" size="lg">
-                        add category +
-                    </Button>
-                </Link>
+            <Link to="addProduct" className="btn btn-info border text-light">
+                add product +
+            </Link>
+            <Link to="addcategory" className="btn btn-info border text-light">
+                add category +
+            </Link>
         </div>
     </div>
-    );
+);
 }
 
 export default DashboardAdmin

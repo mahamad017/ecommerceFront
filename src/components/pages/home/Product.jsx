@@ -57,11 +57,11 @@ function Product() {
                 appContext.showPopup(response.message);
 
             }
-            window.location.href = "/DashboardAdmin/showproducts";
         } catch (error) {
             console.error(error);
             appContext.showPopup("An error occurred. Please try again later.");
         }
+        window.location.href = "/DashboardAdmin/showproducts";
     };
 
     const getProducts = async () => {
@@ -182,10 +182,9 @@ function Product() {
                                     <Trash color="red" style={{ cursor: "pointer" }} size={15} />
                                 </div>
                             </div>
-<<<<<<< HEAD
-=======
+
                         
->>>>>>> edf98466e6bd6cf0b32ed0a498b3e154b206f08c
+
                         ))}
                         <div className={styles.totalPrice}>Total Price: {totalCartBalance} </div>
                         <Button
