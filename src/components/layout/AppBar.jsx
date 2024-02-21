@@ -107,7 +107,7 @@ function AppBar() {
                                                 </Link>
                                             </>
                                         )}
-                                                <Link onClick={onLogout} className="nav-link mt-1">
+                                                <Link onClick={onLogout} className="nav-link mt-1 ">
                                                     Logout
                                                 </Link>
                                                 <Link to="user" className="nav-link mt-1">

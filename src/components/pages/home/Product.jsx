@@ -23,13 +23,13 @@ function Product() {
     const [totalCartBalance, setTotalCartBalance] = useState(0);
     const [products, setProducts] = useState([]);
     const [showProduct, setShowProducts] = useState({ name: "", description: "", price: 0 });
-      const getCategories = async () => {
-          // call API
-          const response = await Api.fetch({ url: "categories" });
+    const getCategories = async () => {
+        // call API
+        const response = await Api.fetch({ url: "categories" });
 
-          // check response
-          if (response != null) setCategories(response.data); // update state with recevied categories
-      };
+        // check response
+        if (response != null) setCategories(response.data); // update state with recevied categories
+    };
 
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
@@ -53,10 +53,11 @@ function Product() {
                 token: token,
                 showPopup: appContext.showPopup,
             });
-            console.log(response);
             if (response != null) {
                 appContext.showPopup(response.message);
+
             }
+            window.location.href = "/DashboardAdmin/showproducts";
         } catch (error) {
             console.error(error);
             appContext.showPopup("An error occurred. Please try again later.");
@@ -87,7 +88,7 @@ function Product() {
         }
     };
     const callorder = async () => {
-       // console.log(cart);
+        // console.log(cart);
         try {
             const response = await Api.fetch({
                 url: "addorders",
@@ -96,34 +97,32 @@ function Product() {
                 token: token,
                 showPopup: appContext.showPopup,
             });
-           // console.log(response)
-    if (response != null) {
-    appContext.showPopup(response.message);
-    }
-} catch (error) {
-    console.error(error);
-    appContext.showPopup("An error occurred. Please try again later.");
-    }
-   
-};
-    
+            // console.log(response)
+            if (response != null) {
+                appContext.showPopup(response.message);
+            }
+        } catch (error) {
+            console.error(error);
+            appContext.showPopup("An error occurred. Please try again later.");
+        }
+    };
 
-   useEffect(() => {
-       // component did mount => get & update categories from back-end
-       if (categories.length == 0) getCategories();
-       getProducts();
-   }, [appContext.appState.search, appContext.appState.category]);
-
+    useEffect(() => {
+        // component did mount => get & update categories from back-end
+        if (categories.length == 0) getCategories();
+        getProducts();
+    }, [appContext.appState.search, appContext.appState.category]);
+    //console.log(appContext.request)
     return (
         // card div
         <>
             {products == null || products.length == 0 ? (
                 <h1>No Product has been found!</h1>
             ) : (
-                <div className={styles.products+ " " + "d-flex justify-content-between flex-wrap"}>
+                <div className={styles.products + " " + "d-flex justify-content-between flex-wrap"}>
                     {products.map((product) => (
-                        <Card className={ styles.product } style={ { width: '20rem', margin: '5px', }}>
-                            <Card.Img className={styles.image} style={{ height: '200px',}} variant="top" src={product.image} />
+                        <Card className={styles.product} style={{ width: "20rem", margin: "5px" }}>
+                            <Card.Img className={styles.image} style={{ height: "200px" }} variant="top" src={product.image} />
                             <Card.Body>
                                 <Card.Title className="mb-5">{product.name}</Card.Title>
                                 <div className="d-flex justify-content-between">
@@ -136,21 +135,22 @@ function Product() {
                                         }}
                                     >
                                         <div className={styles.icons} variant="primary">
-                                            <Eye style = {{ cursor: 'pointer', }} size={15} />
+                                            <Eye style={{ cursor: "pointer" }} size={15} />
                                         </div>
                                     </div>
                                     {authState && (
                                         <>
                                             <Link to={`editProduct/${product.id}`}>
                                                 <div className={styles.icons} variant="primary">
-                                                    <Edit style = {{ cursor: 'pointer', }} size={15} />
+                                                    <Edit style={{ cursor: "pointer" }} size={15} />
                                                 </div>
                                             </Link>
                                             <div className={styles.icons} variant="danger" onClick={() => deleteProduct(product.id)}>
-                                                <Trash color="red" style = {{ cursor: 'pointer', }} size={15} />
+                                                <Trash color="red" style={{ cursor: "pointer" }} size={15} />
                                             </div>
+
                                             <div className={styles.icons} variant="primary" onClick={() => handleSetCart(product.id, product.name, 1, product.price)}>
-                                                <Add style = {{ cursor: 'pointer', }} size={15} />
+                                                <Add style={{ cursor: "pointer" }} size={15} />
                                             </div>
                                         </>
                                     )}
@@ -179,10 +179,9 @@ function Product() {
                                     }}
                                 >
                                     {/* Render trash icon */}
-                                    <Trash color="red" style = {{ cursor: 'pointer', }} size={15} />
+                                    <Trash color="red" style={{ cursor: "pointer" }} size={15} />
                                 </div>
                             </div>
-                         
                         ))}
                         <div className={styles.totalPrice}>Total Price: {totalCartBalance} </div>
                         <Button
@@ -206,7 +205,6 @@ function Product() {
                     <img src={showProduct.image} alt={showProduct.name} className="img-fluid mb-2" />
                     <p>{showProduct.description}</p>
                     <p style={{ fontWeight: "bold" }}>Price: {showProduct.price}$</p>
-                   
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>

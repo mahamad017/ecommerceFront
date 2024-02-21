@@ -6,22 +6,33 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AuthContext } from "../MyApp";
+import Api from "../../tools/api";
+
 
 export const AppContext = createContext({})
 
 export default function Layout() {
     const authContext = useContext(AuthContext)
+   // const [request, setrequest] = useState("");
+    let token =  localStorage.getItem('token');
+    // const checkrequest = async () =>{
+    //     const res = await Api.fetch({ url: "user", token });
+    //         setrequest(res.role);
+    // }
     const [appState, setAppState] = useState({
         popup: {
             show: false,
             message: '',
         },
         search: '',
+       // request: '',
         category: null,
         user: null,
         token: null, // cookie
         cart: [] // cookie
     })
+   // console.log("req"+request);
+    //const setrequest = () => setAppState({ ...appState });
     const closePopup = () => setAppState({ ...appState, popup: { show: false } });
     const showPopup = (msg) => setAppState({ ...appState, popup: { message: msg, show: true } });
     const setSearch = (newText) => setAppState({ ...appState, search: newText })
@@ -49,6 +60,7 @@ export default function Layout() {
                 setSearch,
                 setCategory,
                 setCart,
+                //setrequest,
                 // setToken, setUser
                 login,
                 logout,

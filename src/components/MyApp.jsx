@@ -44,7 +44,7 @@ export default function MyApp() {
                                 <Route path="user" element={<UserDetailsPage />} />
                                 <Route path="orders" element={<MyOrdersPage />} />
                                 <Route path="DashboardAdmin/addProduct" element={<AddProduct />} />
-                                <Route path="editProduct/:productId" element={<EditProduct />} />
+                                <Route path="DashboardAdmin/showproducts/editProduct/:productId" element={<EditProduct />} />
                                 <Route path="DashboardAdmin/dashboard" element={<Dashboard />} />
                                 <Route path="DashboardAdmin/categories" element={<CategoriesAction />} />
                                 <Route path="DashboardAdmin/addcategory" element={<Addcategory />} />

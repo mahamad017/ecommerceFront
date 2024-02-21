@@ -37,7 +37,7 @@ export default function AddProduct() {
             console.error(error);
             appContext.showPopup("An error occurred. Please try again later.");
         }
-        //window.location.href = "/DashboardAdmin";
+        window.location.href = "/DashboardAdmin/categories";
     };
 
 
