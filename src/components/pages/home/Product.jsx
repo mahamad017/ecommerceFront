@@ -172,7 +172,7 @@ function Product() {
                             <div className={styles.dataContainer} key={item.id}>
                                 <div className={styles.name}>{item.name}</div>
                                 <div className={styles.qty}>{item.qty}</div>
-                                <div className={styles.qty}>{item.price}</div>
+                                <div className={styles.price}>{item.price}</div>
                                 <div
                                     onClick={() => {
                                         handelRemoveCartProdact(item.id, item.price);
@@ -182,7 +182,7 @@ function Product() {
                                     <Trash color="red" style = {{ cursor: 'pointer', }} size={15} />
                                 </div>
                             </div>
-                         
+                        
                         ))}
                         <div className={styles.totalPrice}>Total Price: {totalCartBalance} </div>
                         <Button

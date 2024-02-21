@@ -5,10 +5,10 @@ body {
 
   .main-table-containter {
     border-radius: 3vmin;
-    background-color: #dbdbdb;
+    background-color: #ffffffa2;
     width: 100%;
     padding: 1rem 1rem;
-    box-shadow: 0px 2px 5px 0px #00000033;
+    box-shadow: 0px 2px 8px 1px #00000033;
     margin-top:30px;
     margin-bottom:30px;
 

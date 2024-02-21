@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import Api from "../../../../tools/api";
-import styles from "../style.css";
+import styles from "./style.css";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -72,7 +72,7 @@ const Dashboard = () => {
                                     </td>
                                     <td>{user.name}</td>
                                     <td>
-                                        <Button variant="danger" onClick={() => handleDelete(user.id)}>
+                                        <Button variant="info" onClick={() => handleDelete(user.id)}>
                                             Delete
                                         </Button>
                                     </td>
