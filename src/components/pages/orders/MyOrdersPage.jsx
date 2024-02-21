@@ -10,25 +10,26 @@ export default function MyOrdersPage() {
     const [cookies] = useCookies(['token']);
     const token = cookies.token;
 
-    useEffect(() => {
-        getOrders();
-    }, []);
     
     const getOrders = async () => {
         try {
             const response = await Api.fetch({
                 url: 'orders',
-                method: "GET",
-                token: token,
+                
             });
+            //console("hi"+response)
             if (response != null) {
-            setOrders(response.data)
+                setOrders(response.data)
             }
+            console.log("hi" + response);
         } catch (error) {
             console.error(error);
             appContext.showPopup("An error occurred. Please try again later.");
-            }
+        }
     };
+    useEffect(() => {
+        getOrders();
+    }, []);
     
     return <>
         <Table bordered hover variant="dark" responsive="xl" className='mt-3'>

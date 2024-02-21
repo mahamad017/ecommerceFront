@@ -35,14 +35,14 @@ export default function AddProduct() {
             console.error(error);
             appContext.showPopup("An error occurred. Please try again later.");
         }
-        window.location.href = "/";
+        window.location.href = "/DashboardAdmin/categories";
     };
 
 
     return (
         <>
             <Form className="border border-3 border-info rounded p-4 mt-3 bg-warning-subtle">
-                <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
+                {/* <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
                     <Form.Label className="me-2 text-nowrap w-75">Product Name</Form.Label>
                     <Form.Control
                         type="text"
@@ -51,7 +51,7 @@ export default function AddProduct() {
                             setState({ ...state, id: e.target.value });
                         }}
                     />
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
                     <Form.Label className="me-2 text-nowrap w-75">Product Name</Form.Label>
                     <Form.Control

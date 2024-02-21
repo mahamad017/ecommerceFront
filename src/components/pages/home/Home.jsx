@@ -27,12 +27,8 @@ export default function Home() {
             <Categories categories={ categories } />
             <Product  />
             <div className="d-flex justify-content-evenly mt-3">
-                <Link to="addProduct" className="mx-auto">
-                    <Button className={styles.addButtons} variant="outline-info" size="lg">addProduct +</Button>
-                </Link>
-                <Link to="addcategory" className="mx-auto">
-                    <Button className={styles.addButtons} variant="outline-info" size="lg">addcategory +</Button>
-                </Link>
+               
+               
             </div>
 
 

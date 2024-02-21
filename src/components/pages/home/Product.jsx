@@ -8,7 +8,7 @@ import { AuthContext } from "../../MyApp";
 import Api from "../../../tools/api";
 import { AppContext } from "../../layout/Layout";
 import { useCookies } from "react-cookie";
-import { Eye, Trash } from "react-bootstrap-icons";
+import { Cursor, Eye, Trash } from "react-bootstrap-icons";
 import { Add, Edit } from "@mui/icons-material";
 
 function Product() {
@@ -78,16 +78,16 @@ function Product() {
         }
     };
     const callorder = async () => {
-        console.log(JSON.stringify({...cart}))
+       // console.log(cart);
         try {
             const response = await Api.fetch({
                 url: "addorders",
                 method: "POST",
-                Body: JSON.stringify({ ...cart }),
+                body: { products: cart },
                 token: token,
                 showPopup: appContext.showPopup,
             });
-            console.log(response)
+           // console.log(response)
     if (response != null) {
     appContext.showPopup(response.message);
     }
@@ -95,17 +95,19 @@ function Product() {
     console.error(error);
     appContext.showPopup("An error occurred. Please try again later.");
     }
+   
 };
     
 
     useEffect(() => {
         getProducts();
+     
     }, []);
 
     return (
         // card div
         <>
-            {products == null || products.length === 0 ? (
+            {products == null || products.length == 0 ? (
                 <h1>No Product has been found!</h1>
             ) : (
                 <div className={styles.products}>
@@ -124,7 +126,7 @@ function Product() {
                                         }}
                                     >
                                         <div className={styles.icons} variant="primary">
-                                            <Eye className= { styles.icon } size={15} />
+                                            <Eye size={15} />
                                         </div>
                                     </div>
                                     {authState && (
@@ -135,10 +137,10 @@ function Product() {
                                                 </div>
                                             </Link>
                                             <div className={styles.icons} variant="danger" onClick={() => deleteProduct(product.id)}>
-                                                <Trash className= { styles.icon } color="red" size={15} />
+                                                <Trash color="red" size={15} />
                                             </div>
                                             <div className={styles.icons} variant="primary" onClick={() => handleSetCart(product.id, product.name, 1, product.price)}>
-                                                <Add className= { styles.icon } size={15} />
+                                                <Add size={15} />
                                             </div>
                                         </>
                                     )}
@@ -167,10 +169,10 @@ function Product() {
                                     }}
                                 >
                                     {/* Render trash icon */}
-                                    <Trash className= { styles.icon } color="red" size={15} />
+                                    <Trash color="red" size={15} />
                                 </div>
                             </div>
-                        
+                         
                         ))}
                         <div className={styles.totalPrice}>Total Price: {totalCartBalance} </div>
                         <Button
@@ -194,10 +196,10 @@ function Product() {
                     <img src={showProduct.image} alt={showProduct.name} className="img-fluid mb-2" />
                     <p>{showProduct.description}</p>
                     <p style={{ fontWeight: "bold" }}>Price: {showProduct.price}$</p>
-                    <p>{showProduct.description}</p>
+                   
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="info" onClick={handleCloseModal}>
+                    <Button variant="secondary" onClick={handleCloseModal}>
                         Close
                     </Button>
                 </Modal.Footer>

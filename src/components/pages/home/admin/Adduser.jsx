@@ -28,7 +28,7 @@ const Adduser = () => {
             console.error(error);
             appContext.showPopup("An error occurred. Please try again later.");
         }
-        //window.location.href = "/";
+        window.location.href = "/DashboardAdmin/dashboard";
     };
 
     return (

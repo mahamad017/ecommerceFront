@@ -19,7 +19,7 @@ function AppBar() {
     const appContext = useContext(AppContext);
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);
-    const [request,setrequest] = useState("")
+    const [request, setrequest] = useState("");
     let token;
 
     const checkLogin = async () => {
@@ -63,14 +63,12 @@ function AppBar() {
         });
 
         // check response
-        if (response != null)
-        setStatistics(response.data); // update state with recevied categories
+        if (response != null) setStatistics(response.data); // update state with recevied categories
     };
 
     return (
         <Navbar bg="info" data-bs-theme="light" expand="lg" className={styles.appbar + " " + "fw-bold"}>
             <Container fluid>
-                {/* <Navbar.Brand href="/">My Store</Navbar.Brand> */}
                 <Link to="/" className="navbar-brand">
                     My Store
                 </Link>
@@ -92,33 +90,35 @@ function AppBar() {
                                     </>
                                 ) : (
                                     <>
-                                        {/* {(request === "") ?( */}
-                                        <>
-                                            <Link onClick={onLogout} className="nav-link mt-1">
-                                                Logout
-                                            </Link>
-                                            <Link to="user" className="nav-link mt-1">
-                                                My Details
-                                            </Link>
-                                            <Link to="orders" className="nav-link">
-                                                My Orders <Badge bg="secondary m-2">0{statistics["order"]}</Badge>
-                                            </Link>
-                                            <Link to="categories" className="nav-link">
-                                                CategoriesAction <Badge bg="secondary m-2">{statistics["category"]}</Badge>
-                                            </Link>
-                                            {/* <Link to="dashboard" className="nav-link">
+                                        {request === "admin" ? (
+                                            <>
+
+                                                {/* <Link to="dashboard" className="nav-link">
                                                 Users <Badge bg="secondary m-2">{statistics["user"]}</Badge>
                                             </Link> */}
-                                            <Link to="DashboardAdmin" className="nav-link m-2">
-                                                Dashboard
-                                            </Link>
-                                        </>
-                                        {/* ):(                                   */}
+                                                <Link to="DashboardAdmin" className="nav-link m-2">
+                                                    Dashboard
+                                                </Link>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Link to="orders" className="nav-link">
+                                                    My Orders <Badge bg="secondary m-2">0{statistics["order"]}</Badge>
+                                                </Link>
+                                            </>
+                                        )}
+                                                <Link onClick={onLogout} className="nav-link mt-1">
+                                                    Logout
+                                                </Link>
+                                                <Link to="user" className="nav-link mt-1">
+                                                    My Details
+                                                </Link>
                                     </>
                                 )}
                             </>
                         )}
                     </Nav>
+
                     <Form className="d-flex">
                         <Form.Control
                             type="search"
@@ -132,7 +132,7 @@ function AppBar() {
                         <Button
                             onClick={(e) => {
                                 appContext.setSearch(search);
-                            } }
+                            }}
                             className="me-5"
                             variant="outline-light"
                         >

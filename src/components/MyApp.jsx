@@ -16,6 +16,7 @@ import Cart from "./pages/home/Cart";
 import Adduser from "./pages/home/admin/Adduser";
 import DashboardAdmin from "./pages/home/admin/DashboardAdmin";
 import AppBar from "./layout/AppBar";
+import Product from "./pages/home/Product";
 
 export const AuthContext = createContext(false)
 
@@ -34,7 +35,6 @@ export default function MyApp() {
                                 {" "}
                                 {}
                                 <Layout />
-                            
                             </AppContext.Provider>
                         }
                     >
@@ -43,14 +43,15 @@ export default function MyApp() {
                             <>
                                 <Route path="user" element={<UserDetailsPage />} />
                                 <Route path="orders" element={<MyOrdersPage />} />
-                                <Route path="addProduct" element={<AddProduct />} />
+                                <Route path="DashboardAdmin/addProduct" element={<AddProduct />} />
                                 <Route path="editProduct/:productId" element={<EditProduct />} />
                                 <Route path="DashboardAdmin/dashboard" element={<Dashboard />} />
-                                <Route path="categories" element={<CategoriesAction />} />
-                                <Route path="addcategory" element={<Addcategory />} />
+                                <Route path="DashboardAdmin/categories" element={<CategoriesAction />} />
+                                <Route path="DashboardAdmin/addcategory" element={<Addcategory />} />
                                 <Route path="cart" element={<Cart />} />
                                 <Route path="DashboardAdmin/dashboard/adduser" element={<Adduser />} />
                                 <Route path="DashboardAdmin" element={<DashboardAdmin />} />
+                                <Route path="DashboardAdmin/showproducts" element={<Product />} />
                             </>
                         ) : (
                             <>
