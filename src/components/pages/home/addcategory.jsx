@@ -27,7 +27,9 @@ export default function AddProduct() {
                 method: "POST",
                 showPopup: appContext.showPopup,
                 token:localStorage.getItem('token')
+
             });
+            
             if (response != null) {
                 appContext.showPopup(response.message);
             }
@@ -35,38 +37,28 @@ export default function AddProduct() {
             console.error(error);
             appContext.showPopup("An error occurred. Please try again later.");
         }
-        window.location.href = "/DashboardAdmin/categories";
+        //window.location.href = "/DashboardAdmin";
     };
 
 
     return (
         <>
             <Form className="border border-3 border-info rounded p-4 mt-3 bg-warning-subtle">
-                {/* <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
-                    <Form.Label className="me-2 text-nowrap w-75">Product Name</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Product Name"
-                        onChange={(e) => {
-                            setState({ ...state, id: e.target.value });
-                        }}
-                    />
-                </Form.Group> */}
                 <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicName">
-                    <Form.Label className="me-2 text-nowrap w-75">Product Name</Form.Label>
+                    <Form.Label className="me-2 text-nowrap w-75">category Name</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Product Name"
+                        placeholder="category Name"
                         onChange={(e) => {
                             setState({ ...state, name: e.target.value });
                         }}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex justify-content-between align-items-baseline" controlId="formBasicDescription">
-                    <Form.Label className="me-2 text-nowrap w-75">Product Description</Form.Label>
+                    <Form.Label className="me-2 text-nowrap w-75">category Description</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Describe The Product"
+                        placeholder="Describe The category"
                         onChange={(e) => {
                             setState({ ...state, description: e.target.value });
                         }}
